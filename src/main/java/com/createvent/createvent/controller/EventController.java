@@ -2,6 +2,7 @@ package com.createvent.createvent.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +14,10 @@ import com.createvent.createvent.entity.Event;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class AppController {
+public class EventController {
 	
-	private final EventRepository eventRepository = null;
+	@Autowired
+	EventRepository eventRepository;
 	
 	@GetMapping("/events")
 	public List<Event> getEvents() {

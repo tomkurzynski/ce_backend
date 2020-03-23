@@ -11,12 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import com.createvent.createvent.dao.EventRepository;
 
 @Configuration
-//@CrossOrigin(origins = "*")
 public class DataRestConfig implements RepositoryRestConfigurer {
 
 	private EntityManager entityManager;
