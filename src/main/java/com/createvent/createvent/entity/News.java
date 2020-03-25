@@ -43,6 +43,6 @@ public class News {
 	private String newsBody;
 	
 	@ManyToOne
-	@JoinColumn(name = "event_id", nullable = false)
+	@JoinColumn(name = "event_id", referencedColumnName="id", nullable = false)
 	private Event event;
 }
