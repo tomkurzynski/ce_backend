@@ -36,5 +36,5 @@ public class Users {
 	private String email;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private Set<Event> events;
+	private Set<Event> event;
 }
