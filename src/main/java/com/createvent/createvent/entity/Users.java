@@ -1,5 +1,6 @@
 package com.createvent.createvent.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,6 @@ public class Users {
 	@Column(name = "email")
 	private String email;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private Set<Event> event;
+	@OneToMany(mappedBy = "user")
+	private List<Festival> festival;
 }

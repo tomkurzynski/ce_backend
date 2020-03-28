@@ -44,5 +44,5 @@ public class News {
 	
 	@ManyToOne
 	@JoinColumn(name = "event_id", referencedColumnName="id", nullable = false)
-	private Event event;
+	private Festival festival;
 }

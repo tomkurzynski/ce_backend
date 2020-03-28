@@ -21,7 +21,7 @@ import lombok.Setter;
 @Table(name="event")
 @Getter
 @Setter
-public class Event {
+public class Festival {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +32,13 @@ public class Event {
 	@JoinColumn(name = "users_id", nullable = false)
 	private Users user;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+	@OneToMany(mappedBy = "festival")
 	private Set<Food> foods;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+	@OneToMany(mappedBy = "festival")
 	private Set<News> news;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+	@OneToMany(mappedBy = "festival")
 	private Set<Performer> performers;
 	
 	@Column(name = "event_name")
