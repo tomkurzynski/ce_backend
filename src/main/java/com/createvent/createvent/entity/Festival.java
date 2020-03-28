@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
@@ -50,6 +51,7 @@ public class Festival {
 	private String eventDesc;
 	
 	@Column(name = "date_from")
+	
 	private Date dateFrom;
 	
 	@Column(name = "date_to")

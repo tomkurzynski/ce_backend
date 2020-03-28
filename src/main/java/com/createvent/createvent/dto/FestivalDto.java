@@ -3,6 +3,7 @@ package com.createvent.createvent.dto;
 import java.util.Date;
 
 import com.createvent.createvent.entity.Users;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -15,7 +16,6 @@ public class FestivalDto {
 
 	private Long id;
 	
-//	@JsonManagedReference
 	@JsonIgnore
 	private Users user;
 	
@@ -23,9 +23,10 @@ public class FestivalDto {
 	
 	private String eventDesc;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	private Date dateFrom;
 	
-
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	private Date dateTo;
 	
 	private String logoUrl;
