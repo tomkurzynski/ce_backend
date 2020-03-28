@@ -8,6 +8,6 @@ import com.createvent.createvent.entity.Festival;
 
 @CrossOrigin(origins = "*")
 //@RepositoryRestResource
-public interface FestivalRepository extends CrudRepository<Festival, Long>{
+public interface FestivalRepository extends JpaRepository<Festival, Long>{
 
 }
