@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.createvent.createvent.dto.FestivalDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -41,5 +42,5 @@ public class Users {
 	
 	
 	@OneToMany(mappedBy = "user")
-	private List<Festival> festival;
+	private List<FestivalDto> festival;
 }
