@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class FestivalController {
 	public List<FestivalDto> getAllFestivals() {
 		List<Festival> festivals = festivalService.getFestivalList();
 		
-		return festivals.stream().map(this.convertToDto).collect(Collectors.toList());
+		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
 		
 		
 	}
