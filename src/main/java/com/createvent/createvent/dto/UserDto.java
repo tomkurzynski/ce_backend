@@ -2,10 +2,6 @@ package com.createvent.createvent.dto;
 
 import java.util.List;
 
-import com.createvent.createvent.entity.Festival;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +18,6 @@ public class UserDto {
 	
 	private String email;
 	
-	@JsonIgnore
 	private List<FestivalDto> festivals;
 
 	public UserDto(Long id, String firstName, String lastName, String password, String email, List<FestivalDto> festivals) {

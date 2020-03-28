@@ -24,6 +24,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private FestivalService festivalService;
+	
 		
 	@GetMapping(value = "/users")
 	public List<UserDto> getAllUsers() {
@@ -33,6 +36,18 @@ public class UserController {
 	}
 	
 	private UserDto convertToDto(Users user) {
-		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getFestival());
+		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), convertToDto(user.getFestival()));
+		
 	}
+	
+	private List<FestivalDto> convertToDto(List<Festival> festival) {
+		List<Festival> festivals = festivalService.getFestivalList();
+		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
+	}
+
+	private FestivalDto convertToDto(Festival festival) {
+		return new FestivalDto(festival.getId(), festival.getUser(), festival.getName(), festival.getEventDesc(), festival.getDateFrom(), festival.getDateTo(), festival.getLogoUrl(), festival.getFacebook(), 
+				festival.getTwitter(), festival.getLocation());
+		}
+
 }

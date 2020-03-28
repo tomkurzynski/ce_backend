@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.createvent.createvent.dao.FestivalRepository;
 import com.createvent.createvent.dto.FestivalDto;
+import com.createvent.createvent.dto.UserDto;
 import com.createvent.createvent.entity.Festival;
+import com.createvent.createvent.entity.Users;
 import com.createvent.createvent.service.FestivalService;
+import com.createvent.createvent.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -26,6 +29,9 @@ public class FestivalController {
 	@Autowired
 	private FestivalService festivalService;
 	
+	@Autowired
+	private UserService userService;
+	
 	
 	//get all
 	@GetMapping(value = "/festivals")
@@ -33,8 +39,6 @@ public class FestivalController {
 		List<Festival> festivals = festivalService.getFestivalList();
 		
 		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
-		
-		
 	}
 	
 	//get by id
@@ -57,6 +61,11 @@ public class FestivalController {
 				festival.getLocation()	
 				);
 	}
+
+//	
+//	private UserDto convertToDto(Users user) {
+//		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getFestival());
+//	}
 
 }
 
