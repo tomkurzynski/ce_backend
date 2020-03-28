@@ -3,7 +3,6 @@ package com.createvent.createvent.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,8 +26,6 @@ public class FestivalController {
 	@Autowired
 	private FestivalService festivalService;
 	
-	@Autowired
-	private ModelMapper modelMapper;
 	
 	//get all
 	@GetMapping(value = "/festivals")
@@ -48,8 +45,17 @@ public class FestivalController {
 	
 
 	private FestivalDto convertToDto(Festival festival) {
-		FestivalDto festivalDto = modelMapper.map(festival, FestivalDto.class);
-		return festivalDto;
+		return new FestivalDto(festival.getId(), 
+				festival.getUser(),
+				festival.getName(), 
+				festival.getEventDesc(), 
+				festival.getDateFrom(), 
+				festival.getDateTo(), 
+				festival.getLogoUrl(),
+				festival.getFacebook(),
+				festival.getTwitter(),
+				festival.getLocation()	
+				);
 	}
 
 }

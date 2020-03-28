@@ -1,6 +1,5 @@
 package com.createvent.createvent.config;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +14,5 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan(basePackages = "com.createvent.createvent")
 @CrossOrigin(origins = "*")
 public class DataRestConfig implements RepositoryRestConfigurer{
-
-	@Bean
-	public ModelMapper modelMapper() {
-	    return new ModelMapper();
-	}
-	
-	
-	
-
 
 }

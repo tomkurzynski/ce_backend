@@ -3,7 +3,6 @@ package com.createvent.createvent.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,7 @@ import com.createvent.createvent.dto.FestivalDto;
 import com.createvent.createvent.dto.UserDto;
 import com.createvent.createvent.entity.Festival;
 import com.createvent.createvent.entity.Users;
+import com.createvent.createvent.service.FestivalService;
 import com.createvent.createvent.service.UserService;
 
 @RestController
@@ -24,9 +24,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private ModelMapper modelMapper;
-	
+		
 	@GetMapping(value = "/users")
 	public List<UserDto> getAllUsers() {
 		List<Users> users = userService.getAllUsers();
@@ -35,7 +33,6 @@ public class UserController {
 	}
 	
 	private UserDto convertToDto(Users user) {
-		UserDto userDto = modelMapper.map(user, UserDto.class);
 		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getFestival());
 	}
 }
