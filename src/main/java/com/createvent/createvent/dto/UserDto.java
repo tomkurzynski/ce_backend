@@ -23,6 +23,16 @@ public class UserDto {
 	
 	private String email;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Festival> festivals;
+
+	public UserDto(Long id, String firstName, String lastName, String password, String email, Set<Festival> festivals) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.email = email;
+		this.festivals = festivals;
+	}
+	
+	
 }

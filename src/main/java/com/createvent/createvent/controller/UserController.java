@@ -36,6 +36,6 @@ public class UserController {
 	
 	private UserDto convertToDto(Users user) {
 		UserDto userDto = modelMapper.map(user, UserDto.class);
-		return userDto;
+		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getFestival());
 	}
 }
