@@ -25,6 +25,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Festival {
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,4 +70,17 @@ public class Festival {
 
 	@Column(name = "location")
 	private String location;
+	
+	
+	
+	public Festival(String name2, String eventDesc2, Date dateFrom2, Date dateTo2, String facebook2, String twitter2,
+			String twitter3, String location2, Long long1) {
+		
+	}
+
+
+
+	public Festival() {
+	}
+
 }

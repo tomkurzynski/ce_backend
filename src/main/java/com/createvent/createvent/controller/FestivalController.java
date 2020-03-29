@@ -1,15 +1,26 @@
 package com.createvent.createvent.controller;
 
+import java.text.ParseException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.createvent.createvent.dao.FestivalRepository;
@@ -49,13 +60,42 @@ public class FestivalController {
 	@GetMapping(value = "/festivals/{id}")
 	public FestivalFestivalDto Festival(@PathVariable Long id) {
 		Optional<com.createvent.createvent.entity.Festival> festival = festivalService.getFestivalById(id);
+		
 		return convertToDto(festival.get());
 		
 	}
+	 //add
+	@PostMapping(value = "/festivals")
+	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseBody
+	public void addFestival(@RequestBody Festival festival) {
+		festivalService.save(festival);
+	}
 	
+//	private com.createvent.createvent.entity.Festival convertToEntity(FestivalFestivalDto festivalFestivalDto) {
+//		return new Festival(festivalFestivalDto.getName(), 
+//				festivalFestivalDto.getEventDesc(), 
+//				festivalFestivalDto.getDateFrom(), 
+//				festivalFestivalDto.getDateTo(),
+//				festivalFestivalDto.getFacebook(), 
+//				festivalFestivalDto.getTwitter(), 
+//				festivalFestivalDto.getTwitter(), 
+//				festivalFestivalDto.getLocation(),
+//				festivalFestivalDto.getUser().getId());
+//	}
+
 	//update - edit
+	@PostMapping("/festivals/update/{id}")
+	public void updateFestival(@PathVariable Long id, @Valid @RequestBody Festival festival) {
+		festivalService.save(festival);
+	}
+	
 	
 	//delete
+	@DeleteMapping("/festivals/delete/{id}")
+	public void deleteFestival(@PathVariable Long id) {
+		festivalService.delete(id);
+	}
 	
 
 	private FestivalFestivalDto convertToDto(Festival festival) {

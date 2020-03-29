@@ -31,8 +31,14 @@ public class FestivalService {
 	public Optional<Festival> getFestivalById(Long id) {
 		return festivalRepository.findById(id);
 	}
+
+	public void save(Festival festival) {
+		festivalRepository.save(festival);
+	}
 	
-	
+	public void delete(Long id) {
+		festivalRepository.deleteById(id);
+	}
 	
 	
 }
