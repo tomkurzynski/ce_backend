@@ -85,7 +85,7 @@ public class FestivalController {
 //	}
 
 	//update - edit
-	@PostMapping("/festivals/update/{id}")
+	@PutMapping("/festivals/update/{id}")
 	public void updateFestival(@PathVariable Long id, @Valid @RequestBody Festival festival) {
 		festivalService.save(festival);
 	}
