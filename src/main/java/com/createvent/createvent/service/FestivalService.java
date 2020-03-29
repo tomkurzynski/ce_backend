@@ -28,7 +28,7 @@ public class FestivalService {
 		return festivalRepository.findAll();
 	}
 	
-	public List<Festival> getFestivalById(Long id) {
+	public Optional<Festival> getFestivalById(Long id) {
 		return festivalRepository.findById(id);
 	}
 	

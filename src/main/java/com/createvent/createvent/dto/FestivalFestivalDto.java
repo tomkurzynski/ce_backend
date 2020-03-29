@@ -16,7 +16,7 @@ public class FestivalFestivalDto {
 
 	private Long id;
 	
-	@JsonIgnore
+	
 	private FestivalUserDto user;
 	
 	private String name;

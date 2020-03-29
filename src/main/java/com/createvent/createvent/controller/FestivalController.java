@@ -48,8 +48,9 @@ public class FestivalController {
 	//get by id
 	@GetMapping(value = "/festivals/{id}")
 	public FestivalFestivalDto Festival(@PathVariable Long id) {
-		List<Festival> festival = festivalService.getFestivalById(id);
-		return new FestivalFestivalDto(festival.id, users, name, eventDesc, dateFrom, dateTo, logoUrl, facebook, twitter, location)
+		Optional<com.createvent.createvent.entity.Festival> festival = festivalService.getFestivalById(id);
+		return convertToDto(festival.get());
+		
 	}
 	
 	//update - edit

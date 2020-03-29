@@ -41,8 +41,7 @@ public class UserController {
 	}
 	
 	private List<FestivalDto> convertToDto(List<Festival> festival) {
-		List<Festival> festivals = festivalService.getFestivalList();
-		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
+		return festival.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 
 	private FestivalDto convertToDto(Festival festival) {
