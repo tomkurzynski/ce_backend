@@ -1,17 +1,21 @@
 package com.createvent.createvent.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.createvent.createvent.dao.FestivalRepository;
 import com.createvent.createvent.dto.FestivalDto;
+import com.createvent.createvent.dto.FestivalFestivalDto;
+import com.createvent.createvent.dto.FestivalUserDto;
 import com.createvent.createvent.dto.UserDto;
 import com.createvent.createvent.entity.Festival;
 import com.createvent.createvent.entity.Users;
@@ -35,38 +39,40 @@ public class FestivalController {
 	
 	//get all
 	@GetMapping(value = "/festivals")
-	public List<FestivalDto> getAllFestivals() {
+	public List<FestivalFestivalDto> getAllFestivals() {
 		List<Festival> festivals = festivalService.getFestivalList();
 		
 		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	
 	//get by id
+	@GetMapping(value = "/festivals/{id}")
+	public FestivalFestivalDto Festival(@PathVariable Long id) {
+		List<Festival> festival = festivalService.getFestivalById(id);
+		return new FestivalFestivalDto(festival.id, users, name, eventDesc, dateFrom, dateTo, logoUrl, facebook, twitter, location)
+	}
 	
 	//update - edit
 	
 	//delete
 	
 
-	private FestivalDto convertToDto(Festival festival) {
-		return new FestivalDto(festival.getId(), 
-				festival.getUser(),
-				festival.getName(), 
-				festival.getEventDesc(), 
-				festival.getDateFrom(), 
+	private FestivalFestivalDto convertToDto(Festival festival) {
+		return new FestivalFestivalDto(festival.getId(), 
+				convertToDto(festival.getUser()),
+				festival.getName(),
+				festival.getEventDesc(),
+				festival.getDateFrom(),
 				festival.getDateTo(), 
 				festival.getLogoUrl(),
 				festival.getFacebook(),
 				festival.getTwitter(),
-				festival.getLocation()	
-				);
+				festival.getLocation());
 	}
 
-//	
-//	private UserDto convertToDto(Users user) {
-//		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getFestival());
-//	}
-
+	private FestivalUserDto convertToDto(Users user) {
+		return new FestivalUserDto(user.getId());
+	}
 }
 
 

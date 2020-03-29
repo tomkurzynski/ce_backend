@@ -1,11 +1,6 @@
 package com.createvent.createvent.dto;
 
-import java.util.Date;
-
-import com.createvent.createvent.entity.Users;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,43 +8,32 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FestivalUserDto {
-
 	private Long id;
 	
-	@JsonIgnore
-	private UserDto user;
+	private String firstName;
 	
-	private String name;
+	private String lastName;
 	
-	private String eventDesc;
+	private String password;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
-	private Date dateFrom;
+	private String email;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
-	private Date dateTo;
-	
-	private String logoUrl;
-	
-	private String facebook;
-	
-	private String twitter;
+	private List<FestivalDto> festivals;
 
-	private String location;
-
-	public FestivalUserDto(Long id, UserDto users, String name, String eventDesc, Date dateFrom, Date dateTo, String logoUrl,
-			String facebook, String twitter, String location) {
+	public FestivalUserDto(Long id, String firstName, String lastName, String password, String email, List<FestivalDto> festivals) {
 		this.id = id;
-		this.user = users;
-		this.name = name;
-		this.eventDesc = eventDesc;
-		this.dateFrom = dateFrom;
-		this.dateTo = dateTo;
-		this.logoUrl = logoUrl;
-		this.facebook = facebook;
-		this.twitter = twitter;
-		this.location = location;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.email = email;
+		this.festivals = festivals;
+		
 	}
+
+	public FestivalUserDto(Long id) {
+		this.id = id;
+	}
+	
 	
 	
 }

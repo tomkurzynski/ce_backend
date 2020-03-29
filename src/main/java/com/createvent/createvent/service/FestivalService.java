@@ -1,6 +1,7 @@
 package com.createvent.createvent.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 
@@ -19,14 +20,16 @@ import lombok.RequiredArgsConstructor;
 public class FestivalService {
 
 	private final FestivalRepository festivalRepository;
-	
-	private final UserRepository userRepository;
 
 	
 	public List<Festival> getFestivalList() {
 	
 //		Page<Festival> festivals = (Page<Festival>) festivalRepository.findAll();
 		return festivalRepository.findAll();
+	}
+	
+	public List<Festival> getFestivalById(Long id) {
+		return festivalRepository.findById(id);
 	}
 	
 	
