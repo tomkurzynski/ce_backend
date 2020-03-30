@@ -1,6 +1,7 @@
 package com.createvent.createvent.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import com.createvent.createvent.entity.Users;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,16 +15,21 @@ import lombok.Setter;
 //@Getter
 //@Setter
 @Data
-public class FestivalDto {
+public class NewsFestivalDto {
 
+	public NewsFestivalDto(Long id) {
+		this.id = id;
+	}
 
 	private Long id;
 	
 	@JsonIgnore
-	private Users user;
+	private FestivalUserDto user;
 	
+	@JsonIgnore
 	private String name;
 	
+	@JsonIgnore
 	private String eventDesc;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
@@ -32,29 +38,35 @@ public class FestivalDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	private Date dateTo;
 	
+	@JsonIgnore
 	private String logoUrl;
 	
+	@JsonIgnore
 	private String facebook;
 	
+	@JsonIgnore
 	private String twitter;
 
+	@JsonIgnore
 	private String location;
+	
+	@JsonIgnore
+	List<NewsDto> news;
 
-	public FestivalDto(Long id, Users users, String name, String eventDesc, Date dateFrom, Date dateTo, String logoUrl,
-			String facebook, String twitter, String location) {
-		this.id = id;
-		this.user = users;
-		this.name = name;
-		this.eventDesc = eventDesc;
-		this.dateFrom = dateFrom;
-		this.dateTo = dateTo;
-		this.logoUrl = logoUrl;
-		this.facebook = facebook;
-		this.twitter = twitter;
-		this.location = location;
-	}
-
-
+//	public FestivalDto(Long id, Users users, String name, String eventDesc, Date dateFrom, Date dateTo, String logoUrl,
+//			String facebook, String twitter, String location) {
+//		this.id = id;
+//		this.user = users;
+//		this.name = name;
+//		this.eventDesc = eventDesc;
+//		this.dateFrom = dateFrom;
+//		this.dateTo = dateTo;
+//		this.logoUrl = logoUrl;
+//		this.facebook = facebook;
+//		this.twitter = twitter;
+//		this.location = location;
+//	}
+//
 //	public FestivalDto(Long id) {
 //		this.id = id;
 //	}

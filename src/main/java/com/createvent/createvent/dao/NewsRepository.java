@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.createvent.createvent.entity.News;
 
 @CrossOrigin(origins = "*")
-public interface NewsRepository extends CrudRepository<News, Long>{
+public interface NewsRepository extends JpaRepository<News, Long>{
 
 }

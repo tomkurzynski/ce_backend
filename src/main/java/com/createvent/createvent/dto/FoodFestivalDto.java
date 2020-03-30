@@ -13,39 +13,50 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class FestivalFestivalDto {
+public class FoodFestivalDto {
 
 	private Long id;
 	
+	@JsonIgnore
+	private Users user;
 	
-	private FestivalUserDto user;
-	
+	@JsonIgnore
 	private String name;
 	
+	@JsonIgnore
 	private String eventDesc;
 	
+	@JsonIgnore
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	private Date dateFrom;
 	
+	@JsonIgnore
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
-	private Date dateTo;
 	
+	private Date dateTo;
+	@JsonIgnore
 	private String logoUrl;
 	
+	@JsonIgnore
 	private String facebook;
 	
+	@JsonIgnore
 	private String twitter;
 
+	@JsonIgnore
 	private String location;
 	
+	@JsonIgnore
 	private List<FoodDto> foodVendors;
-	
-	private List<NewsDto> news;
 
-	public FestivalFestivalDto(Long id, FestivalUserDto users, String name, String eventDesc, Date dateFrom, Date dateTo, String logoUrl,
-			String facebook, String twitter, String location, List<FoodDto> foodVendors, List<NewsDto> news) {
+	public FoodFestivalDto(Long id) {
 		this.id = id;
-		this.user = users;
+	}
+
+	public FoodFestivalDto(Long id, Users user, String name, String eventDesc, Date dateFrom, Date dateTo,
+			String logoUrl, String facebook, String twitter, String location, List<FoodDto> foodVendors) {
+		this.id = id;
+		this.user = user;
 		this.name = name;
 		this.eventDesc = eventDesc;
 		this.dateFrom = dateFrom;
@@ -55,7 +66,6 @@ public class FestivalFestivalDto {
 		this.twitter = twitter;
 		this.location = location;
 		this.foodVendors = foodVendors;
-		this.news = news;
 	}
 	
 	

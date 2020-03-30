@@ -1,6 +1,7 @@
 package com.createvent.createvent.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -38,13 +39,13 @@ public class Festival {
 	private Users user;
 	
 	@OneToMany(mappedBy = "festival")
-	private Set<Food> foods;
+	private List<Food> foods;
 	
 	@OneToMany(mappedBy = "festival")
-	private Set<News> news;
+	private List<News> news;
 	
 	@OneToMany(mappedBy = "festival")
-	private Set<Performer> performers;
+	private List<Performer> performers;
 	
 	@Column(name = "event_name")
 	private String name;

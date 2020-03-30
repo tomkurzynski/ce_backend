@@ -17,7 +17,7 @@ public class NewsService {
 	
 	private final NewsRepository newsRepository;
 	
-	public List<News> findAll() {
+	public List<News> getNewsList() {
 		return (List<News>) newsRepository.findAll();
 	}
 	
