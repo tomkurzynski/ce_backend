@@ -17,14 +17,10 @@ import lombok.Setter;
 @Data
 public class NewsFestivalDto {
 
-	public NewsFestivalDto(Long id) {
-		this.id = id;
-	}
-
 	private Long id;
 	
 	@JsonIgnore
-	private FestivalUserDto user;
+	private Users user;
 	
 	@JsonIgnore
 	private String name;
@@ -32,10 +28,10 @@ public class NewsFestivalDto {
 	@JsonIgnore
 	private String eventDesc;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
+	@JsonIgnore
 	private Date dateFrom;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
+	@JsonIgnore
 	private Date dateTo;
 	
 	@JsonIgnore
@@ -52,6 +48,10 @@ public class NewsFestivalDto {
 	
 	@JsonIgnore
 	List<NewsDto> news;
+	
+	public NewsFestivalDto(Long id) {
+		this.id = id;
+	}
 
 //	public FestivalDto(Long id, Users users, String name, String eventDesc, Date dateFrom, Date dateTo, String logoUrl,
 //			String facebook, String twitter, String location) {

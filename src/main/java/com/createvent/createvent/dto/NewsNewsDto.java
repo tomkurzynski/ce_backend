@@ -2,6 +2,7 @@ package com.createvent.createvent.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -22,8 +23,10 @@ private Long id;
 	
 	private String title;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	private Date dateCreated;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	private Date lastUpdated;
 	
 	private String newsBody;
