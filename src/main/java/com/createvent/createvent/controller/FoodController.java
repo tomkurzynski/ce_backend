@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.createvent.createvent.dto.FestivalDto;
-import com.createvent.createvent.dto.FoodDto;
 import com.createvent.createvent.dto.FoodFestivalDto;
 import com.createvent.createvent.dto.FoodFoodDto;
 import com.createvent.createvent.entity.Festival;

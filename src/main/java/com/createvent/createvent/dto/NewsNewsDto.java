@@ -10,16 +10,7 @@ import lombok.Data;
 @Data
 public class NewsNewsDto {
 
-	public NewsNewsDto(Long id, String title, String newsBody, Date dateCreated, Date lastUpdated,
-			NewsFestivalDto festival) {
-		this.id = id;
-		this.title = title;
-		this.newsBody = newsBody;
-		this.dateCreated = dateCreated;
-		this.lastUpdated = lastUpdated;
-	}
-
-private Long id;
+	private Long id;
 	
 	private String title;
 	
@@ -34,5 +25,12 @@ private Long id;
 	@JsonIgnore
 	private NewsFestivalDto festival;
 	
-	
+	public NewsNewsDto(Long id, String title, String newsBody, Date dateCreated, Date lastUpdated,
+			NewsFestivalDto festival) {
+		this.id = id;
+		this.title = title;
+		this.newsBody = newsBody;
+		this.dateCreated = dateCreated;
+		this.lastUpdated = lastUpdated;
+	}	
 }

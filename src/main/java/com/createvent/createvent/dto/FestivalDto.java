@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.createvent.createvent.entity.Food;
 import com.createvent.createvent.entity.News;
+import com.createvent.createvent.entity.Performer;
 import com.createvent.createvent.entity.Users;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -45,6 +46,8 @@ public class FestivalDto {
 	private Food food;
 	
 	private News news;
+	
+	private Performer performers;
 
 	public FestivalDto(Long id, Users users, String name, String eventDesc, Date dateFrom, Date dateTo, String logoUrl,
 			String facebook, String twitter, String location) {

@@ -47,7 +47,7 @@ public class NewsFestivalDto {
 	private String location;
 	
 	@JsonIgnore
-	List<NewsDto> news;
+	private List<NewsDto> news;
 	
 	public NewsFestivalDto(Long id) {
 		this.id = id;
