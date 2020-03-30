@@ -1,11 +1,19 @@
 package com.createvent.createvent.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +35,32 @@ public class NewsController {
 	public List<NewsNewsDto> getAllNews() {
 		List<News> news = newsService.getNewsList();
 		return news.stream().map(this::convertToDto).collect(Collectors.toList());
+	}
+	
+	//get by id
+	@GetMapping("/news/{id}")
+	public NewsNewsDto getNewsById(@PathVariable Long id) {
+		Optional<News> news = newsService.findById(id);
+		return convertToDto(news.get());
+	}
+	
+	
+	//add
+	@PostMapping("/news")
+	public void addNews(@RequestBody News newsItem) {
+		newsService.save(newsItem);
+	}
+	
+	//update
+	@PutMapping("/news/update/{id}")
+	public void updateNewsItem(@PathVariable Long id, @Valid @RequestBody News newsItem) {
+		newsService.save(newsItem);
+	}
+	
+	//delete
+	@DeleteMapping("/news/delete/{id}")
+	public void deleteNewsItem(@PathVariable Long id) {
+		newsService.deleteById(id);
 	}
 
 	public NewsNewsDto convertToDto(News news) {
