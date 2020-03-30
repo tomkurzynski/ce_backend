@@ -23,8 +23,6 @@ public class FestivalService {
 
 	
 	public List<Festival> getFestivalList() {
-	
-//		Page<Festival> festivals = (Page<Festival>) festivalRepository.findAll();
 		return festivalRepository.findAll();
 	}
 	

@@ -1,6 +1,7 @@
 package com.createvent.createvent.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,9 +23,17 @@ public class FoodService {
 		return foodRepository.findAll();
 	}
 	//list by id
+	public Optional<Food> getFoodVendorById(Long id) {
+		return foodRepository.findById(id);
+	}
 	
 	//edit
+	public void save(Food food) {
+		foodRepository.save(food);
+	}
 	
 	//delete
-
+	public void delete(Long id) {
+		foodRepository.deleteById(id);
+	}
 }
