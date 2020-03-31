@@ -23,7 +23,20 @@ public class PerformerPerformerDto {
 
 	private String spotify;
 	
-	@JsonIgnore
+	
 	private PerformerFestivalDto festival;
+	
+	public PerformerPerformerDto(Long id, String name, String description, String webUrl, String facebook,
+			String youtube, String twitter, String spotify, PerformerFestivalDto festival) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.webUrl = webUrl;
+		this.facebook = facebook;
+		this.youtube = youtube;
+		this.twitter = twitter;
+		this.spotify = spotify;
+		this.festival = festival;
+	}
 	
 }
