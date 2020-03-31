@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
-public class PerformerFestivalDto {
+public class StageRoomFestivalDto {
 
 	private Long id;
 	
@@ -48,10 +48,10 @@ public class PerformerFestivalDto {
 	
 	@JsonIgnore
 	private List<PerformerDto> performers;
+	
+	@JsonIgnore List<StageRoomDto> stageRooms;
 
-	public PerformerFestivalDto(Long id) {
+	public StageRoomFestivalDto(Long id) {
 		this.id = id;
 	}
-	
-	
 }

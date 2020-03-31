@@ -18,13 +18,13 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name="event")
-@Getter
-@Setter
+@Data
 public class Festival {
 	
 	
@@ -46,6 +46,9 @@ public class Festival {
 	
 	@OneToMany(mappedBy = "festival")
 	private List<Performer> performers;
+	
+	@OneToMany(mappedBy = "festival")
+	private List<StageRoom> stageRoom;
 	
 	@Column(name = "event_name")
 	private String name;
@@ -71,17 +74,5 @@ public class Festival {
 
 	@Column(name = "location")
 	private String location;
-	
-	
-	
-	public Festival(String name2, String eventDesc2, Date dateFrom2, Date dateTo2, String facebook2, String twitter2,
-			String twitter3, String location2, Long long1) {
-		
-	}
-
-
-
-	public Festival() {
-	}
 
 }
