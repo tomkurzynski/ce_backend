@@ -48,6 +48,7 @@ public class FestivalController {
 	//get all
 	@GetMapping("/festivals")
 	public List<FestivalFestivalDto> getAllFestivals() {
+		
 		List<Festival> festivals = festivalService.getFestivalList();
 		
 		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -96,6 +97,7 @@ public class FestivalController {
 	
 
 	private FestivalFestivalDto convertToDto(Festival festival) {
+
 		return new FestivalFestivalDto(festival.getId(), 
 				convertToDto(festival.getUser()),
 				festival.getName(),
@@ -130,5 +132,4 @@ public class FestivalController {
 		return new NewsDto(news.getId(), news.getTitle(), news.getDateCreated());
 	}
 }
-
 
