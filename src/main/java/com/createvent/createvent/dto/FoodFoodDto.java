@@ -1,5 +1,7 @@
 package com.createvent.createvent.dto;
 
+import java.sql.Blob;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,13 +14,13 @@ public class FoodFoodDto {
 	
 	private String foodType;
 	
-	private byte[] logoUrl;
+	private Blob logoUrl;
 	
 	private String facebook;
 	
 	private FoodFestivalDto festival;
 
-	public FoodFoodDto(Long id, String foodName, String foodType, byte[] logoUrl, String facebook, FoodFestivalDto festival) {
+	public FoodFoodDto(Long id, String foodName, String foodType, Blob logoUrl, String facebook, FoodFestivalDto festival) {
 		this.id = id;
 		this.foodName = foodName;
 		this.foodType = foodType;

@@ -1,5 +1,7 @@
 package com.createvent.createvent.dto;
 
+import java.sql.Blob;
+
 import com.createvent.createvent.entity.Festival;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,7 +22,7 @@ public class FoodDto {
 	private String foodType;
 	
 	@JsonIgnore
-	private byte[] logoUrl;
+	private Blob logoUrl;
 	
 	@JsonIgnore
 	private String facebook;

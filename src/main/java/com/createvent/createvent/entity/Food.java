@@ -1,5 +1,7 @@
 package com.createvent.createvent.entity;
 
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,8 +31,8 @@ public class Food {
 	private String foodType;
 	
 	@Lob
-	@Column(name="food_logo_url", length = 1000)
-	private byte[] logoUrl;
+	@Column(name="food_logo_url")
+	private Blob logoUrl;
 	
 	@Column(name="food_facebook")
 	private String facebook;
