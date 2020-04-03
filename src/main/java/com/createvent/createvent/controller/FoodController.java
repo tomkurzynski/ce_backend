@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.createvent.createvent.dto.FoodDto;
 import com.createvent.createvent.dto.FoodFestivalDto;
 import com.createvent.createvent.dto.FoodFoodDto;
 import com.createvent.createvent.entity.Festival;
@@ -48,8 +49,8 @@ public class FoodController {
 
 	@PostMapping(value = "/foods", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public String upload(@RequestParam("file") MultipartFile file,
-						 @RequestParam("food") Food food) {
+	public String upload(@RequestPart("file") MultipartFile file,
+						 @RequestPart("food") FoodFoodDto food) {
 		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
 	}
 	
