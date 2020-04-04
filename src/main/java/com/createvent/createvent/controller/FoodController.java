@@ -24,8 +24,13 @@ import com.createvent.createvent.service.FoodService;
 @CrossOrigin(origins = "*")
 public class FoodController {
 
+	private static final FoodFoodDto FoodFoodDto = null;
+
 	@Autowired
 	private FoodService foodService;
+	
+	@Autowired
+	private StringToFoodConverter foodConverter;
 	
 	@GetMapping("/foods")
 	public List<FoodFoodDto> getAllFoodVendors() {
@@ -49,9 +54,13 @@ public class FoodController {
 
 	@PostMapping(value = "/foods", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public String upload(@RequestPart("file") MultipartFile file,
-						 @RequestPart("food") FoodFoodDto food) {
-		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
+	public FoodFoodDto upload(@RequestPart("file") MultipartFile file,
+						 @RequestPart("food") String food) {
+//		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
+		
+		FoodFoodDto foodConverted = foodConverter.convert(food); 
+		return FoodFoodDto;
+	
 	}
 	
 	//update
