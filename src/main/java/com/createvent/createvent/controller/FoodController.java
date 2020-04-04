@@ -1,5 +1,7 @@
 package com.createvent.createvent.controller;
 
+import java.io.IOException;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,8 +31,7 @@ public class FoodController {
 	
 	@Autowired
 	private StringToFoodDtoConverter foodConverter;
-	
-	
+		
 	@GetMapping("/foods")
 	public List<FoodFoodDto> getAllFoodVendors() {
 		List<Food> foodVendors = foodService.getFoodVendorList();
@@ -44,6 +45,7 @@ public class FoodController {
 		return convertToDto(foodVendor.get());
 	}
 	
+
 	//add
 //	@PostMapping(value = "/foods", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 //	@ResponseStatus(HttpStatus.CREATED)
@@ -54,16 +56,28 @@ public class FoodController {
 	@PostMapping(value = "/foods", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public FoodFoodDto upload(@RequestPart("file") MultipartFile file,
-						 @RequestPart("food") String food) {
+						 @RequestPart("food") String food) throws IOException {
 //		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
 		FoodFoodDto foodConverted = foodConverter.convert(food); 
+//		Blob blob = null;
+//		try {
+//			blob = Hibernate.getLobCreator(sessionFactory.getCurrentSession()).createBlob(file.getBytes());
+//		} catch (HibernateException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		foodConverted.setLogoUrl(file.getBytes());
+		foodService.save(foodConverted);
 		return foodConverted;
 	
 	}
 	
 	//update
 	@PutMapping("/foods/update/{id}")
-	public void updateFoodVendor(@PathVariable Long id, @Valid @RequestBody Food foodVendor) {
+	public void updateFoodVendor(@PathVariable Long id, @Valid @RequestBody FoodFoodDto foodVendor) {
 		foodService.save(foodVendor);
 	}
 	
@@ -85,4 +99,5 @@ public class FoodController {
 	private FoodFestivalDto convertToDto(Festival festival) {
 		return new FoodFestivalDto(festival.getId());
 	}
+	
 }

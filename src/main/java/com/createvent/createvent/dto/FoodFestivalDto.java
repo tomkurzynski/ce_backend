@@ -53,6 +53,8 @@ public class FoodFestivalDto {
 	public FoodFestivalDto(Long id) {
 		this.id = id;
 	}
+	
+	public FoodFestivalDto() {}
 //
 //	public FoodFestivalDto(Long id, Users user, String name, String eventDesc, Date dateFrom, Date dateTo,
 //			String logoUrl, String facebook, String twitter, String location, List<FoodDto> foodVendors) {

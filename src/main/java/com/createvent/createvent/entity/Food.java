@@ -32,7 +32,7 @@ public class Food {
 	
 	@Lob
 	@Column(name="food_logo_url")
-	private Blob logoUrl;
+	private byte[] logoUrl;
 	
 	@Column(name="food_facebook")
 	private String facebook;

@@ -22,7 +22,7 @@ public class FoodDto {
 	private String foodType;
 	
 	@JsonIgnore
-	private Blob logoUrl;
+	private byte[] logoUrl;
 	
 	@JsonIgnore
 	private String facebook;
