@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StringToFoodConverter implements Converter<String, FoodFoodDto> {
+public class StringToFoodDtoConverter implements Converter<String, FoodFoodDto> {
 
     @Autowired
     private ObjectMapper objectMapper;
