@@ -59,7 +59,7 @@ public class FoodController {
 //		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
 		
 		FoodFoodDto foodConverted = foodConverter.convert(food); 
-		return FoodFoodDto;
+		return foodConverted;
 	
 	}
 	
