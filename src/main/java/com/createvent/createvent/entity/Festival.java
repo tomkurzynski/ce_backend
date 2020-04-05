@@ -1,5 +1,6 @@
 package com.createvent.createvent.entity;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -63,8 +65,9 @@ public class Festival {
 	@Column(name = "date_to")
 	private Date dateTo;
 	
+	@Lob
 	@Column(name = "logo_url")
-	private String logoUrl;
+	private byte[] logoUrl;
 	
 	@Column(name = "facebook")
 	private String facebook;

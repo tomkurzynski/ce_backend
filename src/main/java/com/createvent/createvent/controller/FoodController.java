@@ -46,10 +46,10 @@ public class FoodController {
 	}
 	
 
-	//add
+
 //	@PostMapping(value = "/foods", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 //	@ResponseStatus(HttpStatus.CREATED)
-//	public void addFoodVendor(@RequestBody Food foodVendor, MultipartFile file) {
+//	public void addFoodVendor(@RequestBody FoodFoodDto foodVendor, MultipartFile file) {
 //		foodService.save(foodVendor);
 //	}
 
@@ -59,16 +59,7 @@ public class FoodController {
 						 @RequestPart("food") String food) throws IOException {
 //		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
 		FoodFoodDto foodConverted = foodConverter.convert(food); 
-//		Blob blob = null;
-//		try {
-//			blob = Hibernate.getLobCreator(sessionFactory.getCurrentSession()).createBlob(file.getBytes());
-//		} catch (HibernateException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		byte[] image = file.getBytes();
 		foodConverted.setLogoUrl(file.getBytes());
 		foodService.save(foodConverted);
 		return foodConverted;

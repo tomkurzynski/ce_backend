@@ -1,5 +1,6 @@
 package com.createvent.createvent.dto;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class FestivalFestivalDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	private Date dateTo;
 	
-	private String logoUrl;
+	private byte[] logoUrl;
 	
 	private String facebook;
 	
@@ -42,7 +43,7 @@ public class FestivalFestivalDto {
 	
 	private List<NewsDto> news;
 
-	public FestivalFestivalDto(Long id, FestivalUserDto users, String name, String eventDesc, Date dateFrom, Date dateTo, String logoUrl,
+	public FestivalFestivalDto(Long id, FestivalUserDto users, String name, String eventDesc, Date dateFrom, Date dateTo, byte[] logoUrl,
 			String facebook, String twitter, String location, List<FoodDto> foodVendors, List<NewsDto> news) {
 		this.id = id;
 		this.user = users;
