@@ -1,5 +1,6 @@
 package com.createvent.createvent.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.createvent.createvent.dto.FestivalFestivalDto;
 import com.createvent.createvent.dto.FestivalUserDto;
@@ -40,6 +44,9 @@ public class FestivalController {
 	
 	@Autowired
 	private FestivalService festivalService;
+	
+	@Autowired
+	private StringToFestivalDtoConverter festivalConverter;
 	
 //	@Autowired
 //	private UserService userService;
@@ -63,28 +70,28 @@ public class FestivalController {
 		
 	}
 	 //add
-	@PostMapping("/festivals")
+//	@PostMapping("/festivals")
+//	@ResponseStatus(HttpStatus.CREATED)
+//	@ResponseBody
+//	public void addFestival(@RequestBody Festival festival) {
+//		festivalService.save(festival);
+//	}
+	
+	@PostMapping(value = "/festivals", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public void addFestival(@RequestBody Festival festival) {
-		festivalService.save(festival);
+	public void addFestival(@RequestPart("file") MultipartFile file,
+			 @RequestPart("festival") String festival) throws IOException {
+		FestivalFestivalDto festivalConverted = festivalConverter.convertFestival(festival);
+		festivalConverted.setLogoUrl(file.getBytes());
+		festivalService.save(festivalConverted);
 	}
 	
-//	private com.createvent.createvent.entity.Festival convertToEntity(FestivalFestivalDto festivalFestivalDto) {
-//		return new Festival(festivalFestivalDto.getName(), 
-//				festivalFestivalDto.getEventDesc(), 
-//				festivalFestivalDto.getDateFrom(), 
-//				festivalFestivalDto.getDateTo(),
-//				festivalFestivalDto.getFacebook(), 
-//				festivalFestivalDto.getTwitter(), 
-//				festivalFestivalDto.getTwitter(), 
-//				festivalFestivalDto.getLocation(),
-//				festivalFestivalDto.getUser().getId());
-//	}
+
 
 	//update - edit
 	@PutMapping("/festivals/update/{id}")
-	public void updateFestival(@PathVariable Long id, @Valid @RequestBody Festival festival) {
+	public void updateFestival(@PathVariable Long id, @Valid @RequestBody FestivalFestivalDto festival) {
 		festivalService.save(festival);
 	}
 	

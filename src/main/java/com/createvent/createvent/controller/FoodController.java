@@ -59,7 +59,6 @@ public class FoodController {
 						 @RequestPart("food") String food) throws IOException {
 //		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
 		FoodFoodDto foodConverted = foodConverter.convert(food); 
-		byte[] image = file.getBytes();
 		foodConverted.setLogoUrl(file.getBytes());
 		foodService.save(foodConverted);
 		return foodConverted;
