@@ -1,11 +1,13 @@
 package com.createvent.createvent.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +35,12 @@ public class UserController {
 		List<Users> users = userService.getAllUsers();
 		
 		return users.stream().map(this::convertToDto).collect(Collectors.toList());
+	}
+	
+	@GetMapping("/users/{id}")
+	public UserDto getUserById(@PathVariable Long id) {
+		Optional<Users> user = userService.getUserById(id);
+		return convertToDto(user.get());
 	}
 	
 	private UserDto convertToDto(Users user) {
