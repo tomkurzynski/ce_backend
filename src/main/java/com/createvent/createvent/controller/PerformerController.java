@@ -93,8 +93,8 @@ public class PerformerController {
 										performer.getYoutube(),
 										performer.getTwitter(),
 										performer.getSpotify(),
-										performer.getPhoto(),
-										convertoToDto(performer.getFestival()));
+										convertoToDto(performer.getFestival()),
+										performer.getPhoto());
 	}
 
 	private PerformerFestivalDto convertoToDto(Festival festival) {
