@@ -29,7 +29,7 @@ public class PerformerFestivalDto {
 	private Date dateTo;
 	
 	@JsonIgnore
-	private String logoUrl;
+	private byte[] logoUrl;
 	
 	@JsonIgnore
 	private String facebook;

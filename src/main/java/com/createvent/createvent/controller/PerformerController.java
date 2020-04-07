@@ -1,5 +1,6 @@
 package com.createvent.createvent.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.createvent.createvent.dto.PerformerFestivalDto;
 import com.createvent.createvent.dto.PerformerPerformerDto;
@@ -32,6 +36,9 @@ public class PerformerController {
 
 	@Autowired
 	private PerformerService performerService;
+	
+	@Autowired
+	private StringToPerformerDtoConverter performerConverter;
 	
 	//get all
 	@GetMapping("/performers")
@@ -48,15 +55,26 @@ public class PerformerController {
 	}
 	
 	//add
-	@PostMapping("/performers")
+//	@PostMapping("/performers")
+//	@ResponseStatus(HttpStatus.CREATED)
+//	public void addPerformer(@RequestBody Performer performer) {
+//		performerService.save(performer);
+//	}
+	
+	@PostMapping(value = "/performers", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void addPerformer(@RequestBody Performer performer) {
-		performerService.save(performer);
+	public PerformerPerformerDto upload(@RequestPart("file") MultipartFile file,
+						 @RequestPart("performer") String performer) throws IOException {
+		PerformerPerformerDto performerConverted = performerConverter.convert(performer); 
+		performerConverted.setPhoto(file.getBytes());
+		performerService.save(performerConverted);
+		return performerConverted;
+	
 	}
 	
 	//update
 	@PutMapping("/performers/update/{id}")
-	public void updatePerformer(@PathVariable Long id, @Valid @RequestBody Performer performer) {
+	public void updatePerformer(@PathVariable Long id, @Valid @RequestBody PerformerPerformerDto performer) {
 		performerService.save(performer);
 	}
 	
@@ -75,6 +93,7 @@ public class PerformerController {
 										performer.getYoutube(),
 										performer.getTwitter(),
 										performer.getSpotify(),
+										performer.getPhoto(),
 										convertoToDto(performer.getFestival()));
 	}
 

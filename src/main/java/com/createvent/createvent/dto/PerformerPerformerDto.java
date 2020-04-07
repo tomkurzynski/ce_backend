@@ -21,11 +21,13 @@ public class PerformerPerformerDto {
 
 	private String spotify;
 	
+	private byte[] photo;
+	
 	
 	private PerformerFestivalDto festival;
 	
 	public PerformerPerformerDto(Long id, String name, String description, String webUrl, String facebook,
-			String youtube, String twitter, String spotify, PerformerFestivalDto festival) {
+			String youtube, String twitter, String spotify, byte[] photo, PerformerFestivalDto festival) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -35,6 +37,7 @@ public class PerformerPerformerDto {
 		this.twitter = twitter;
 		this.spotify = spotify;
 		this.festival = festival;
+		this.photo = photo;
 	}
 	
 }

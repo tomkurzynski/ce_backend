@@ -32,6 +32,9 @@ public class PerformerDto {
 	
 	@JsonIgnore
 	private Festival festival;
+	
+	@JsonIgnore
+	private byte[] photo;
 
 	public PerformerDto(Long id, String name) {
 		this.id = id;

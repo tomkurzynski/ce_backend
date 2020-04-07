@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -43,6 +44,10 @@ public class Performer {
 	
 	@Column(name="spotify")
 	private String spotify;
+	
+	@Lob
+	@Column(name="photo")
+	private byte[] photo;
 	
 	@ManyToOne
 	@JoinColumn(name = "event_id", nullable = false)
