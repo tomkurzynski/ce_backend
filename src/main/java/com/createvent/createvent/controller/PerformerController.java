@@ -73,9 +73,18 @@ public class PerformerController {
 	}
 	
 	//update
-	@PutMapping("/performers/update/{id}")
-	public void updatePerformer(@PathVariable Long id, @Valid @RequestBody PerformerPerformerDto performer) {
-		performerService.save(performer);
+//	@PutMapping("/performers/update/{id}")
+//	public void updatePerformer(@PathVariable Long id, @Valid @RequestBody PerformerPerformerDto performer) {
+//		performerService.save(performer);
+//	}
+	
+	@PutMapping(value = "/performers/update/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseStatus(HttpStatus.CREATED)
+	public void updatePerformer(@PathVariable Long id, @Valid @RequestPart("file") MultipartFile file,
+			 				@RequestPart("performer") String performer) throws IOException {
+		PerformerPerformerDto performerConverted = performerConverter.convert(performer); 
+		performerConverted.setPhoto(file.getBytes());
+		performerService.save(performerConverted);
 	}
 	
 	//delete
