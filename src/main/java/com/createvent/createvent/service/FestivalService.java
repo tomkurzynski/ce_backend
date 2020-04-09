@@ -1,5 +1,6 @@
 package com.createvent.createvent.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,10 @@ public class FestivalService {
 	
 	public List<Festival> getFestivalList() {
 		return festivalRepository.findAll();
+	}
+	
+	public List<Festival> getFestivalByUserId(Long userId) {
+		return festivalRepository.findByUserId(userId);
 	}
 	
 	public Optional<Festival> getFestivalById(Long id) {

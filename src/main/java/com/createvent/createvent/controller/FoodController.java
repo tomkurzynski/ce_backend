@@ -45,6 +45,12 @@ public class FoodController {
 		return convertToDto(foodVendor.get());
 	}
 	
+	@GetMapping("/foods/festival/{id}")
+	public List<FoodFoodDto> getVendorsByFestivalId(@PathVariable Long id) {
+		List<Food> foodVendors = foodService.getFoodVendorByFestivalId(id);
+		return foodVendors.stream().map(this::convertToDto).collect(Collectors.toList());
+	}
+	
 
 
 //	@PostMapping(value = "/foods", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

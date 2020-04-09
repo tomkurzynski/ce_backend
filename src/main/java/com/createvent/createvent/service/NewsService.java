@@ -25,6 +25,10 @@ public class NewsService {
 		return newsRepository.findById(id);
 	}
 	
+	public List<News> getNewsByFestivalId(Long id) {
+		return newsRepository.findNewsByFestivalId(id);
+	}
+	
 	public News save(News newsItem) {
 		return newsRepository.save(newsItem);
 	}

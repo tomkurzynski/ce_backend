@@ -29,9 +29,14 @@ public class FoodService {
 	public List<Food> getFoodVendorList() {
 		return foodRepository.findAll();
 	}
+	
 	//list by id
 	public Optional<Food> getFoodVendorById(Long id) {
 		return foodRepository.findById(id);
+	}
+	
+	public List<Food> getFoodVendorByFestivalId(Long id) {
+		return foodRepository.findByFestivalId(id);
 	}
 	
 	//edit
