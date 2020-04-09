@@ -54,6 +54,12 @@ public class PerformerController {
 		return convertToDto(performer.get());
 	}
 	
+	@GetMapping("/performers/festival/{id}")
+	public List<PerformerPerformerDto> getPerformerByFestivalId(@PathVariable Long id) {
+		List<Performer> performers = performerService.getPerformerByFestivalId(id);
+		return performers.stream().map(this::convertToDto).collect(Collectors.toList());
+	}
+	
 	//add
 //	@PostMapping("/performers")
 //	@ResponseStatus(HttpStatus.CREATED)

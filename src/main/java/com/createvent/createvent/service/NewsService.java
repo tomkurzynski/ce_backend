@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.createvent.createvent.dao.NewsRepository;
 import com.createvent.createvent.entity.News;
@@ -11,7 +12,7 @@ import com.createvent.createvent.entity.News;
 import lombok.RequiredArgsConstructor;
 
 @Service
-
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class NewsService {
 	
