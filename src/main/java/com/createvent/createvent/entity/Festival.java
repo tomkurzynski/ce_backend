@@ -40,16 +40,16 @@ public class Festival {
 	@JoinColumn(name = "users_id", nullable = false)
 	private Users user;
 	
-	@OneToMany(mappedBy = "festival")
+	@OneToMany(mappedBy = "festival", orphanRemoval = true, cascade = CascadeType.PERSIST)
 	private List<Food> foods;
 	
-	@OneToMany(mappedBy = "festival")
+	@OneToMany(mappedBy = "festival", orphanRemoval = true, cascade = CascadeType.PERSIST)
 	private List<News> news;
 	
-	@OneToMany(mappedBy = "festival")
+	@OneToMany(mappedBy = "festival", orphanRemoval = true, cascade = CascadeType.PERSIST)
 	private List<Performer> performers;
 	
-	@OneToMany(mappedBy = "festival")
+	@OneToMany(mappedBy = "festival", orphanRemoval = true, cascade = CascadeType.PERSIST)
 	private List<StageRoom> stageRoom;
 	
 	@Column(name = "event_name")

@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,10 +35,12 @@ public class News {
 	
 	@Column(name = "date_created")
 	@CreationTimestamp
+	@JsonFormat(pattern="dd-MMM-yyyy")
 	private Date dateCreated;
 	
 	@Column(name = "last_updated")
 	@UpdateTimestamp
+	@JsonFormat(pattern="dd-MMM-yyyy")
 	private Date lastUpdated;
 	
 	@Column(name = "news_body")

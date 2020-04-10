@@ -30,7 +30,7 @@ import com.createvent.createvent.entity.Performer;
 import com.createvent.createvent.service.PerformerService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/performers")
 @CrossOrigin(origins = "*")
 public class PerformerController {
 
@@ -41,20 +41,20 @@ public class PerformerController {
 	private StringToPerformerDtoConverter performerConverter;
 	
 	//get all
-	@GetMapping("/performers")
+	@GetMapping()
 	public List<PerformerPerformerDto> getAllPerformers() {
 		List<Performer> performers = performerService.getPerformerList();
 		return performers.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	
 	//get by id
-	@GetMapping("/performers/{id}")
+	@GetMapping("{id}")
 	public PerformerPerformerDto getPerformerById(@PathVariable Long id) {
 		Optional<Performer> performer = performerService.getPerformerById(id);
 		return convertToDto(performer.get());
 	}
 	
-	@GetMapping("/performers/festival/{id}")
+	@GetMapping("festival/{id}")
 	public List<PerformerPerformerDto> getPerformerByFestivalId(@PathVariable Long id) {
 		List<Performer> performers = performerService.getPerformerByFestivalId(id);
 		return performers.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -67,7 +67,7 @@ public class PerformerController {
 //		performerService.save(performer);
 //	}
 	
-	@PostMapping(value = "/performers", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public PerformerPerformerDto upload(@RequestPart("file") MultipartFile file,
 						 @RequestPart("performer") String performer) throws IOException {
@@ -84,7 +84,7 @@ public class PerformerController {
 //		performerService.save(performer);
 //	}
 	
-	@PutMapping(value = "/performers/update/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void updatePerformer(@PathVariable Long id, @Valid @RequestPart("file") MultipartFile file,
 			 				@RequestPart("performer") String performer) throws IOException {
@@ -94,7 +94,7 @@ public class PerformerController {
 	}
 	
 	//delete
-	@DeleteMapping("/performers/delete/{id}")
+	@DeleteMapping("/{id}")
 	public void deletePerformer(@PathVariable Long id) {
 		performerService.delete(id);
 	}

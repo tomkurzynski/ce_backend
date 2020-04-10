@@ -22,7 +22,7 @@ import com.createvent.createvent.entity.Food;
 import com.createvent.createvent.service.FoodService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/foods")
 @CrossOrigin(origins = "*")
 public class FoodController {
 
@@ -32,20 +32,20 @@ public class FoodController {
 	@Autowired
 	private StringToFoodDtoConverter foodConverter;
 		
-	@GetMapping("/foods")
+	@GetMapping()
 	public List<FoodFoodDto> getAllFoodVendors() {
 		List<Food> foodVendors = foodService.getFoodVendorList();
 		return foodVendors.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	
 	//get by id
-	@GetMapping("/foods/{id}")
+	@GetMapping("{id}")
 	public FoodFoodDto getVendorById(@PathVariable Long id) {
 		Optional<Food> foodVendor = foodService.getFoodVendorById(id);
 		return convertToDto(foodVendor.get());
 	}
 	
-	@GetMapping("/foods/festival/{id}")
+	@GetMapping("/festival/{id}")
 	public List<FoodFoodDto> getVendorsByFestivalId(@PathVariable Long id) {
 		List<Food> foodVendors = foodService.getFoodVendorByFestivalId(id);
 		return foodVendors.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -59,7 +59,7 @@ public class FoodController {
 //		foodService.save(foodVendor);
 //	}
 
-	@PostMapping(value = "/foods", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public FoodFoodDto upload(@RequestPart("file") MultipartFile file,
 						 @RequestPart("food") String food) throws IOException {
@@ -72,13 +72,13 @@ public class FoodController {
 	}
 	
 	//update
-	@PutMapping("/foods/update/{id}")
+	@PutMapping("/{id}")
 	public void updateFoodVendor(@PathVariable Long id, @Valid @RequestBody FoodFoodDto foodVendor) {
 		foodService.save(foodVendor);
 	}
 	
 	//delete
-	@DeleteMapping("/foods/delete/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteFoodVendor(@PathVariable Long id) {
 		foodService.delete(id);
 	}

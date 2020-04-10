@@ -2,6 +2,7 @@ package com.createvent.createvent.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,6 @@ public class Users {
 	private String email;
 	
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.PERSIST)
 	private List<Festival> festival;
 }

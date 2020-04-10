@@ -35,7 +35,7 @@ import com.createvent.createvent.entity.Users;
 import com.createvent.createvent.service.FestivalService;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/festivals")
 @CrossOrigin(origins = "*")
 public class FestivalController {
 
@@ -53,7 +53,7 @@ public class FestivalController {
 	
 	
 	//get all
-	@GetMapping("/festivals")
+	@GetMapping()
 	public List<FestivalFestivalDto> getAllFestivals() {
 		
 		List<Festival> festivals = festivalService.getFestivalList();
@@ -62,7 +62,7 @@ public class FestivalController {
 	}
 	
 	//get by id
-	@GetMapping("/festivals/{id}")
+	@GetMapping("/{id}")
 	public FestivalFestivalDto Festival(@PathVariable Long id) {
 		Optional<com.createvent.createvent.entity.Festival> festival = festivalService.getFestivalById(id);
 		
@@ -70,7 +70,7 @@ public class FestivalController {
 		
 	}
 	
-	@GetMapping("/festivals/user/{id}")
+	@GetMapping("/user/{id}")
 	public List<FestivalFestivalDto> getByUserId(@PathVariable Long id) {
 		List<Festival> festivals = festivalService.getFestivalByUserId(id);
 		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -83,7 +83,7 @@ public class FestivalController {
 //		festivalService.save(festival);
 //	}
 	
-	@PostMapping(value = "/festivals", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
 	public void addFestival(@RequestPart("file") MultipartFile file,
@@ -96,14 +96,14 @@ public class FestivalController {
 
 
 	//update - edit
-	@PutMapping("/festivals/update/{id}")
+	@PutMapping("/{id}")
 	public void updateFestival(@PathVariable Long id, @Valid @RequestBody FestivalFestivalDto festival) {
 		festivalService.save(festival);
 	}
 	
 	
 	//delete
-	@DeleteMapping("/festivals/delete/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteFestival(@PathVariable Long id) {
 		festivalService.delete(id);
 	}

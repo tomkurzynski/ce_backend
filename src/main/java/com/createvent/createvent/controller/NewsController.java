@@ -24,27 +24,27 @@ import com.createvent.createvent.entity.News;
 import com.createvent.createvent.service.NewsService;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/news")
 @CrossOrigin(origins = "*")
 public class NewsController {
 	
 	@Autowired
 	private NewsService newsService;
 	
-	@GetMapping("/news")
+	@GetMapping
 	public List<NewsNewsDto> getAllNews() {
 		List<News> news = newsService.getNewsList();
 		return news.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	
 	//get by id
-	@GetMapping("/news/{id}")
+	@GetMapping("/{id}")
 	public NewsNewsDto getNewsById(@PathVariable Long id) {
 		Optional<News> news = newsService.findById(id);
 		return convertToDto(news.get());
 	}
 	
-	@GetMapping("/news/festival/{id}")
+	@GetMapping("/festival/{id}")
 	public List<NewsNewsDto> getNewsByFestivalId(@PathVariable Long id) {
 		List<News> news = newsService.getNewsByFestivalId(id);
 		return news.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -52,19 +52,27 @@ public class NewsController {
 	
 	
 	//add
-	@PostMapping("/news")
+	@PostMapping
 	public void addNews(@RequestBody News newsItem) {
 		newsService.save(newsItem);
 	}
 	
 	//update
-	@PutMapping("/news/update/{id}")
+	@PutMapping("/{id}")
 	public void updateNewsItem(@PathVariable Long id, @Valid @RequestBody News newsItem) {
+		
+		Optional<News> news = newsService.findById(id);
+		
+		
+		newsItem.setFestival(news.get().getFestival());
+		
+		
+		
 		newsService.save(newsItem);
 	}
 	
 	//delete
-	@DeleteMapping("/news/delete/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteNewsItem(@PathVariable Long id) {
 		newsService.deleteById(id);
 	}
