@@ -1,8 +1,7 @@
 package com.createvent.createvent.entity;
 
-import java.util.List;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,29 +9,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity
-@Table(name = "room_stage")
 @Data
-public class StageRoom {
-	
+public class RunningOrder {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "room_name")
-	private String name;
+	@Column(name = "start_time")
+	private Date startTime;
+	
+	@Column(name = "end_time")
+	private Date endTime;
 	
 	@ManyToOne
-	@JoinColumn(name = "event_id", nullable = false)
-	private Festival festival;
+	@JoinColumn(name = "timetable_id", nullable = false)
+	private Timetable timetable;
 	
-	@OneToMany(mappedBy = "stageRoom", orphanRemoval = true, cascade = CascadeType.PERSIST)
-	private List<Timetable> timetables;
-
+	@ManyToOne
+	@JoinColumn(name = "performer_id", nullable = false)
+	private Performer performer;
 }

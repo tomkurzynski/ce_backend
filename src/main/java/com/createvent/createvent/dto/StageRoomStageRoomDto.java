@@ -11,6 +11,8 @@ public class StageRoomStageRoomDto {
 
 	private StageRoomFestivalDto festival;
 	
+
+	
 	public StageRoomStageRoomDto(Long id, String name, StageRoomFestivalDto festival) {
 		this.id = id;
 		this.name = name;

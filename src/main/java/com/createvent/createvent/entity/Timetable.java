@@ -16,23 +16,24 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "room_stage")
+@Table(name="timetable")
 @Data
-public class StageRoom {
-	
+public class Timetable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "room_name")
+	@Column(name = "name")
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name = "event_id", nullable = false)
-	private Festival festival;
 	
-	@OneToMany(mappedBy = "stageRoom", orphanRemoval = true, cascade = CascadeType.PERSIST)
-	private List<Timetable> timetables;
-
+	@ManyToOne
+	@JoinColumn(name = "room_stage_id", nullable = false)
+	private StageRoom stageRoom;
+	
+	@OneToMany(mappedBy = "timetable", orphanRemoval = true, cascade = CascadeType.PERSIST)
+	List<RunningOrder> runningOrder;
+	
 }
