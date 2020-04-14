@@ -2,6 +2,7 @@ package com.createvent.createvent.dto;
 
 import java.util.List;
 
+import com.createvent.createvent.entity.StageRoom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;

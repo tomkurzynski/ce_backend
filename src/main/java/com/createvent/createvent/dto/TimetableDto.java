@@ -1,5 +1,4 @@
 package com.createvent.createvent.dto;
-
 import java.util.List;
 
 import com.createvent.createvent.entity.StageRoom;
@@ -22,10 +21,13 @@ public class TimetableDto {
 			List<PerformerDto> performers) {
 		this.id = id;
 		this.name = name;
-
 		this.stageRoom = stageRoom;
 		this.performers = performers;
 	}
+
+	public TimetableDto() {
+	}
+	
 	
 	
 	
