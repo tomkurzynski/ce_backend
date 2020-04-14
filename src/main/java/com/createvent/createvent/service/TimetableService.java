@@ -40,8 +40,8 @@ public class TimetableService {
 	}
 	
 	//save
-	public void save(@Valid TimetableDto timetableDto) {
-		Timetable timetable = modelMapper.map(timetableDto, Timetable.class);
+	public void save(TimetableDto timetable2) {
+		Timetable timetable = modelMapper.map(timetable2, Timetable.class);
 		timetableRepository.save(timetable);
 	}
 	

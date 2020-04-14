@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,7 +61,7 @@ public class TimetableController {
 	
 	//add
 	@PostMapping
-	public void addTimetable(@RequestBody TimetableTimetableDto timetable) {
+	public void addTimetable(@RequestBody TimetableDto timetable) {
 		timetableService.save(timetable);
 	}
 	
@@ -75,6 +76,10 @@ public class TimetableController {
 	}
 	
 	//delete
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		timetableService.delete(id);
+	}
 	
 	public TimetableTimetableDto convertToDto(Timetable timetable) {
 		return new TimetableTimetableDto(timetable.getId(), 
