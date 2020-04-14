@@ -40,7 +40,7 @@ public class TimetableService {
 	}
 	
 	//save
-	public void save(TimetableDto timetable2) {
+	public void save(TimetableTimetableDto timetable2) {
 		Timetable timetable = modelMapper.map(timetable2, Timetable.class);
 		timetableRepository.save(timetable);
 	}

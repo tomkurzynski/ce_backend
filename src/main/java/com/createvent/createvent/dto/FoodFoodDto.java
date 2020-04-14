@@ -1,7 +1,5 @@
 package com.createvent.createvent.dto;
 
-import java.sql.Blob;
-
 import lombok.Data;
 
 @Data

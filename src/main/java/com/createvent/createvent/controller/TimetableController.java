@@ -1,5 +1,6 @@
 package com.createvent.createvent.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -7,7 +8,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.createvent.createvent.dto.PerformerDto;
-import com.createvent.createvent.dto.TimetableDto;
 import com.createvent.createvent.dto.TimetableStageRoomDto;
 import com.createvent.createvent.dto.TimetableTimetableDto;
-import com.createvent.createvent.entity.Performer;
-import com.createvent.createvent.entity.RunningOrder;
 import com.createvent.createvent.entity.StageRoom;
 import com.createvent.createvent.entity.Timetable;
-import com.createvent.createvent.service.PerformerService;
 import com.createvent.createvent.service.TimetableService;
 
 @RestController
@@ -36,9 +36,9 @@ public class TimetableController {
 	
 	@Autowired
 	private TimetableService timetableService;
-	
+		
 	@Autowired
-	private PerformerService performerService;
+	private StringToTimetableDtoConverter timetableConverter;
 	
 	//get all / all by stage id / by id
 	@GetMapping
@@ -60,18 +60,18 @@ public class TimetableController {
 	}
 	
 	//add
-	@PostMapping
-	public void addTimetable(@RequestBody TimetableDto timetable) {
-		timetableService.save(timetable);
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseStatus(HttpStatus.CREATED)
+	public void addTimetable(@RequestPart("file") MultipartFile file,
+			 @RequestPart("timetable") String timetable) throws IOException {
+		TimetableTimetableDto timetableConverted = timetableConverter.convert(timetable); 
+		timetableConverted.setFile(file.getBytes());
+		timetableService.save(timetableConverted);
 	}
 	
 	//update
 	@PutMapping("/{id}")
-	public void update(@PathVariable Long id, @Valid @RequestBody TimetableDto timetable) {
-		Optional<Timetable> tempTimetable = timetableService.getById(id);
-		
-		timetable.setStageRoom(tempTimetable.get().getStageRoom());
-		
+	public void update(@PathVariable Long id, @Valid @RequestBody TimetableTimetableDto timetable) {
 		timetableService.save(timetable);
 	}
 	
@@ -84,22 +84,13 @@ public class TimetableController {
 	public TimetableTimetableDto convertToDto(Timetable timetable) {
 		return new TimetableTimetableDto(timetable.getId(), 
 				timetable.getName(), 
-				convertStageToDto(timetable.getStageRoom()), 
-				convertRunningOrderToDto(timetable.getRunningOrder()));
+				convertStageToDto(timetable.getStageRoom()),
+				timetable.getFile()
+				);
 	}
 
-
-	private List<PerformerDto> convertRunningOrderToDto(List<RunningOrder> runningOrder) {
-		List<Performer> performers = performerService.getPerformerList();
-		return performers.stream().map(this::convertPerformerToDto).collect(Collectors.toList());
-	}
 
 	private TimetableStageRoomDto convertStageToDto(StageRoom stageRoom) {
 		return new TimetableStageRoomDto(stageRoom.getId());
 	}
-	
-	private PerformerDto convertPerformerToDto(Performer performer) {
-		return new PerformerDto(performer.getId(), performer.getName());
-	}
-
 }

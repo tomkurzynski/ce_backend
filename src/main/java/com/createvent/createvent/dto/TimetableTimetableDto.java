@@ -1,8 +1,5 @@
 package com.createvent.createvent.dto;
 
-import java.util.List;
-
-import com.createvent.createvent.entity.StageRoom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -16,16 +13,15 @@ public class TimetableTimetableDto {
 	@JsonIgnore
 	private TimetableStageRoomDto stageRoom;
 	
-	List<PerformerDto> performers;
+	private byte[] file;
 
-	public TimetableTimetableDto(Long id, String name, TimetableStageRoomDto stageRoom,
-			List<PerformerDto> performers) {
+	public TimetableTimetableDto(Long id, String name, TimetableStageRoomDto stageRoom, byte[] file) {
 		this.id = id;
 		this.name = name;
 		this.stageRoom = stageRoom;
-		this.performers = performers;
+		this.file = file;
 	}
-	
+
 	
 	
 }
