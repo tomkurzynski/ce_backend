@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.createvent.createvent.dto.NewsFestivalDto;
@@ -30,6 +34,9 @@ public class NewsController {
 	
 	@Autowired
 	private NewsService newsService;
+	
+	@Autowired
+	private StringToNewsDtoConverter newsConverter;
 	
 	@GetMapping
 	public List<NewsNewsDto> getAllNews() {
@@ -52,16 +59,18 @@ public class NewsController {
 	
 	
 	//add
-	@PostMapping
-	public void addNews(@RequestBody News newsItem) {
-		newsService.save(newsItem);
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseStatus(HttpStatus.CREATED)
+	public void addNews( @RequestPart("news") String newsItem) {
+		NewsNewsDto newsConverted = newsConverter.convert(newsItem);
+		newsService.save(newsConverted);
 	}
 	
 	//update
 	@PutMapping("/{id}")
-	public void updateNewsItem(@PathVariable Long id, @Valid @RequestBody News newsItem) {
+	public void updateNewsItem(@PathVariable Long id, @Valid @RequestBody NewsNewsDto newsItem) {
 		
-		Optional<News> news = newsService.findById(id);
+		Optional<NewsNewsDto> news = newsService.findById(id);
 		
 		
 		newsItem.setFestival(news.get().getFestival());

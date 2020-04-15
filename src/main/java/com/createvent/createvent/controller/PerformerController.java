@@ -69,11 +69,19 @@ public class PerformerController {
 	
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public PerformerPerformerDto upload(@RequestPart("file") MultipartFile file,
+	public PerformerPerformerDto upload(@RequestPart(name = "file", required = false) MultipartFile file,
 						 @RequestPart("performer") String performer) throws IOException {
 		PerformerPerformerDto performerConverted = performerConverter.convert(performer); 
-		performerConverted.setPhoto(file.getBytes());
+		
+		if (file != null) {
+			performerConverted.setPhoto(file.getBytes());
+		} else {
+			
+//			Optional<Performer> performer1 = performerService.getPerformerById(performerConverted.getId());
+//			performerConverted.setPhoto(performer1.get().getPhoto());
+		}
 		performerService.save(performerConverted);
+		
 		return performerConverted;
 	
 	}
@@ -86,10 +94,14 @@ public class PerformerController {
 	
 	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void updatePerformer(@PathVariable Long id, @Valid @RequestPart("file") MultipartFile file,
+	public void updatePerformer(@PathVariable Long id, @Valid @RequestPart(name = "file", required = false) MultipartFile file,
 			 				@RequestPart("performer") String performer) throws IOException {
 		PerformerPerformerDto performerConverted = performerConverter.convert(performer); 
-		performerConverted.setPhoto(file.getBytes());
+		
+		if (file != null) {
+			performerConverted.setPhoto(file.getBytes());
+		}
+		
 		performerService.save(performerConverted);
 	}
 	

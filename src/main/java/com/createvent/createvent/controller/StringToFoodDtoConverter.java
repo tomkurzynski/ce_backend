@@ -1,7 +1,6 @@
 package com.createvent.createvent.controller;
 
 import com.createvent.createvent.dto.FoodFoodDto;
-import com.createvent.createvent.entity.Food;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.convert.converter.Converter;
