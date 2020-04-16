@@ -38,9 +38,9 @@ public class NewsService {
 		return newsRepository.findNewsByFestivalId(id);
 	}
 	
-	public News save(NewsNewsDto newsItem) {
-		News news = modelMapper.map(newsItem, News.class);
-		return newsRepository.save(news);
+	public News save(News newsItem) {
+//		News news = modelMapper.map(newsItem, News.class);
+		return newsRepository.save(newsItem);
 	}
 	
 	public void deleteById(Long id) {

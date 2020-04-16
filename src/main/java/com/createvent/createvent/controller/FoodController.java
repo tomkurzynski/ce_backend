@@ -61,20 +61,29 @@ public class FoodController {
 
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public FoodFoodDto upload(@RequestPart("file") MultipartFile file,
+	public FoodFoodDto upload(@RequestPart(name = "file", required = false) MultipartFile file,
 						 @RequestPart("food") String food) throws IOException {
 //		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
 		FoodFoodDto foodConverted = foodConverter.convert(food); 
-		foodConverted.setLogoUrl(file.getBytes());
+		if(file != null) {
+			foodConverted.setLogoUrl(file.getBytes());
+		}
+		
 		foodService.save(foodConverted);
 		return foodConverted;
 	
 	}
 	
 	//update
-	@PutMapping("/{id}")
-	public void updateFoodVendor(@PathVariable Long id, @Valid @RequestBody FoodFoodDto foodVendor) {
-		foodService.save(foodVendor);
+	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseStatus(HttpStatus.CREATED)
+	public void updateFoodVendor(@PathVariable Long id, @Valid @RequestPart(name = "file", required = false) MultipartFile file,
+								@RequestPart("food") String food) throws IOException {
+		FoodFoodDto foodConverted = foodConverter.convert(food);
+		if(file != null) {
+			foodConverted.setLogoUrl(file.getBytes());
+		}
+		foodService.save(foodConverted);
 	}
 	
 	//delete
