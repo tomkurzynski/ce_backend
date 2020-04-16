@@ -39,7 +39,7 @@ public class FoodController {
 	}
 	
 	//get by id
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public FoodFoodDto getVendorById(@PathVariable Long id) {
 		Optional<Food> foodVendor = foodService.getFoodVendorById(id);
 		return convertToDto(foodVendor.get());
