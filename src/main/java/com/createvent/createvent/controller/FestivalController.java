@@ -75,6 +75,7 @@ public class FestivalController {
 		List<Festival> festivals = festivalService.getFestivalByUserId(id);
 		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
+	
 	 //add
 //	@PostMapping("/festivals")
 //	@ResponseStatus(HttpStatus.CREATED)

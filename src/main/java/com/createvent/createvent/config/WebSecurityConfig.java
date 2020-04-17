@@ -1,5 +1,9 @@
 package com.createvent.createvent.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,11 +14,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+    private CustomAuthenticationProvider authProvider;
+ 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authProvider);
+    }
+ 
 	
 //	  @Override
 //	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -63,9 +78,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .authorizeRequests()
 	            .antMatchers(HttpMethod.OPTIONS, "/**")
 	            .permitAll()
+	            .antMatchers(HttpMethod.GET, "/**")
+	            .permitAll()
 	            .anyRequest()
 	            .authenticated()
 	            .and()
 	            .httpBasic();
+	    }
+	 
+	 @Bean
+	    public PasswordEncoder passwordEncoder() {
+	        return new BCryptPasswordEncoder();
 	    }
 }

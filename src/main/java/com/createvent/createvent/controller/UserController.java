@@ -15,7 +15,6 @@ import com.createvent.createvent.dto.FestivalDto;
 import com.createvent.createvent.dto.UserDto;
 import com.createvent.createvent.entity.Festival;
 import com.createvent.createvent.entity.Users;
-import com.createvent.createvent.service.FestivalService;
 import com.createvent.createvent.service.UserService;
 
 @RestController
@@ -25,11 +24,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private FestivalService festivalService;
-	
-		
+			
 	@GetMapping(value = "/users")
 	public List<UserDto> getAllUsers() {
 		List<Users> users = userService.getAllUsers();
@@ -42,6 +37,14 @@ public class UserController {
 		Optional<Users> user = userService.getUserById(id);
 		return convertToDto(user.get());
 	}
+	
+	@GetMapping("{email}")
+	public UserDto getUserByEmail(@PathVariable String email) {
+		Users user = userService.getByEmail(email);
+		return convertToDto(user);
+	}
+	
+	
 	
 	private UserDto convertToDto(Users user) {
 		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), convertToDto(user.getFestival()));

@@ -19,5 +19,4 @@ public class DataRestConfig {
 	    return new ModelMapper();
 	}
 	
-	
 }
