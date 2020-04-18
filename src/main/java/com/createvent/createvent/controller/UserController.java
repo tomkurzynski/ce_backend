@@ -1,13 +1,18 @@
 package com.createvent.createvent.controller;
 
+import java.security.Principal;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,11 +24,27 @@ import com.createvent.createvent.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping("/login")
+	public boolean login(@RequestBody UserDto user) {
+		return user.getEmail().equalsIgnoreCase("name") && user.getPassword().equals("password");
+	}
+	
+	@RequestMapping("/user")
+	//@ResponseStatus(value = HttpStatus.FORBIDDEN)
+	public Principal user(HttpServletRequest request) {
+			
+		String authToken = request.getHeader("Authorization")
+				.substring("Basic".length()).trim();
+		return () ->  new String(Base64.getDecoder()
+		          .decode(authToken)).split(":")[0];
+
+	}
 			
 	@GetMapping(value = "/users")
 	public List<UserDto> getAllUsers() {

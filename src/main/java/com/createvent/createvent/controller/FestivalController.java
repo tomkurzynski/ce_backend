@@ -36,7 +36,7 @@ import com.createvent.createvent.service.FestivalService;
 
 @RestController
 @RequestMapping(value = "/api/festivals")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FestivalController {
 
 //	@Autowired
