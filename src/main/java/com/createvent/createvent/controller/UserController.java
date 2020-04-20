@@ -24,7 +24,7 @@ import com.createvent.createvent.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api")
-@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = "*", allowCredentials = "true")
 public class UserController {
 
 	@Autowired
@@ -36,8 +36,7 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
-	@RequestMapping("/user")
-	//@ResponseStatus(value = HttpStatus.FORBIDDEN)
+	@GetMapping("/user")
 	public Principal user(HttpServletRequest request) {
 			
 		String authToken = request.getHeader("Authorization")
