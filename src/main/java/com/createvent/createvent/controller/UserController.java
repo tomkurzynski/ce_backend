@@ -24,7 +24,7 @@ import com.createvent.createvent.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 public class UserController {
 
 	@Autowired
@@ -35,6 +35,7 @@ public class UserController {
 		return user.getEmail().equalsIgnoreCase("name") && user.getPassword().equals("password");
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 	@RequestMapping("/user")
 	//@ResponseStatus(value = HttpStatus.FORBIDDEN)
 	public Principal user(HttpServletRequest request) {
