@@ -1,6 +1,7 @@
 package com.createvent.createvent.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -80,10 +81,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .httpBasic();
 	    }
 	 
-	 
-	    public PasswordEncoder passwordEncoder() {
-	        return new BCryptPasswordEncoder();
-	    }
+	 @Bean
+	 public PasswordEncoder passwordEncoder() {
+		 return new BCryptPasswordEncoder();
+	 }
 	 
 //	 @Bean
 //		CorsConfigurationSource corsConfigurationSource() {

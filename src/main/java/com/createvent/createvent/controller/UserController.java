@@ -30,10 +30,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/login")
-	public boolean login(@RequestBody UserDto user) {
-		return user.getEmail().equalsIgnoreCase("name") && user.getPassword().equals("password");
-	}
+//	@RequestMapping("/login")
+//	public boolean login(@RequestBody UserDto user) {
+//		return user.getEmail().equalsIgnoreCase("name") && user.getPassword().equals("password");
+//	}
 	
 //	@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 	@GetMapping("/user")
@@ -62,7 +62,8 @@ public class UserController {
 	
 	@GetMapping("/user/{email}")
 	public UserDto getUserByEmail(@PathVariable String email) {
-		Users user = userService.getByEmail(email);
+		String emailSanitized = email.replaceAll(",", ".");
+		Users user = userService.getByEmail(emailSanitized);
 		return convertToDto(user);
 	}
 	
