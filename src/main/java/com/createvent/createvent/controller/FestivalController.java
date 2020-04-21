@@ -53,13 +53,13 @@ public class FestivalController {
 	
 	
 	//get all
-	@GetMapping()
-	public List<FestivalFestivalDto> getAllFestivals() {
-		
-		List<Festival> festivals = festivalService.getFestivalList();
-		
-		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
-	}
+//	@GetMapping()
+//	public List<FestivalFestivalDto> getAllFestivals() {
+//		
+//		List<Festival> festivals = festivalService.getFestivalList();
+//		
+//		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
+//	}
 	
 	//get by id
 	@GetMapping("/{id}")
@@ -70,7 +70,7 @@ public class FestivalController {
 		
 	}
 	
-	@GetMapping("/user/{id}")
+	@GetMapping("/list/{id}")
 	public List<FestivalFestivalDto> getByUserId(@PathVariable Long id) {
 		List<Festival> festivals = festivalService.getFestivalByUserId(id);
 		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());

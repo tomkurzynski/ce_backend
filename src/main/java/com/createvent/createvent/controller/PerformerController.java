@@ -53,7 +53,7 @@ public class PerformerController {
 		return convertToDto(performer.get());
 	}
 	
-	@GetMapping("festival/{id}")
+	@GetMapping("/list/{id}")
 	public List<PerformerPerformerDto> getPerformerByFestivalId(@PathVariable Long id) {
 		List<Performer> performers = performerService.getPerformerByFestivalId(id);
 		return performers.stream().map(this::convertToDto).collect(Collectors.toList());

@@ -45,7 +45,7 @@ public class FoodController {
 		return convertToDto(foodVendor.get());
 	}
 	
-	@GetMapping("/festival/{id}")
+	@GetMapping("/list/{id}")
 	public List<FoodFoodDto> getVendorsByFestivalId(@PathVariable Long id) {
 		List<Food> foodVendors = foodService.getFoodVendorByFestivalId(id);
 		return foodVendors.stream().map(this::convertToDto).collect(Collectors.toList());
