@@ -1,6 +1,7 @@
 package com.createvent.createvent.config;
 
 import java.util.ArrayList;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -27,7 +28,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String password = authentication.getCredentials().toString();
 		try {
 			String userEmail = userService.getByEmail(name).getEmail();
-			String pass = userService.getByEmail(name).getPassword();
+//			String pass = userService.getByEmail(name).getPassword();
+			String pass = new String(Base64.getDecoder().decode(userService.getByEmail(name).getPassword()));
 
 			if (userEmail.equalsIgnoreCase(name) && pass.equals(password)) {
 

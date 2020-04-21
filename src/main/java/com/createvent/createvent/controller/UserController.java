@@ -35,7 +35,7 @@ public class UserController {
 		return user.getEmail().equalsIgnoreCase("name") && user.getPassword().equals("password");
 	}
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
+//	@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 	@GetMapping("/user")
 	public Principal user(HttpServletRequest request) {
 			
@@ -59,7 +59,8 @@ public class UserController {
 		return convertToDto(user.get());
 	}
 	
-	@GetMapping("{email}")
+	
+	@GetMapping("/user/{email}")
 	public UserDto getUserByEmail(@PathVariable String email) {
 		Users user = userService.getByEmail(email);
 		return convertToDto(user);
