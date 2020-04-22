@@ -46,7 +46,7 @@ public class NewsController {
 		return convertToDto(news.get());
 	}
 	
-	@GetMapping("/festival/{id}")
+	@GetMapping("/list/{id}")
 	public List<NewsNewsDto> getNewsByFestivalId(@PathVariable Long id) {
 		List<News> news = newsService.getNewsByFestivalId(id);
 		return news.stream().map(this::convertToDto).collect(Collectors.toList());

@@ -86,11 +86,15 @@ public class FestivalController {
 	
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	@ResponseBody
-	public void addFestival(@RequestPart("file") MultipartFile file,
+//	@ResponseBody
+	public void addFestival(@RequestPart(name = "file", required = false) MultipartFile file,
 			 @RequestPart("festival") String festival) throws IOException {
 		FestivalFestivalDto festivalConverted = festivalConverter.convertFestival(festival);
-		festivalConverted.setLogoUrl(file.getBytes());
+		
+		if(file != null) {
+			festivalConverted.setLogoUrl(file.getBytes());
+		}
+		
 		festivalService.save(festivalConverted);
 	}
 	
