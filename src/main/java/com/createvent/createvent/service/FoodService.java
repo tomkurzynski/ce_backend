@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.createvent.createvent.dao.FoodRepository;
 import com.createvent.createvent.dto.FoodFoodDto;
 import com.createvent.createvent.entity.Food;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 

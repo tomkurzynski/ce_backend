@@ -1,16 +1,10 @@
 package com.createvent.createvent.dto;
 
-import java.sql.Blob;
-
 import com.createvent.createvent.entity.Festival;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-//@Getter
-//@Setter
 @Data
 public class FoodDto {
 	
