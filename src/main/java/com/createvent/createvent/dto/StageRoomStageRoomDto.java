@@ -11,11 +11,12 @@ public class StageRoomStageRoomDto {
 
 	private StageRoomFestivalDto festival;
 	
-
-	
-	public StageRoomStageRoomDto(Long id, String name, StageRoomFestivalDto festival) {
+	private byte[] timetableFile;
+		
+	public StageRoomStageRoomDto(Long id, String name, StageRoomFestivalDto festival, byte[] timetableFile) {
 		this.id = id;
 		this.name = name;
 		this.festival = festival;
+		this.timetableFile = timetableFile;
 	}
 }

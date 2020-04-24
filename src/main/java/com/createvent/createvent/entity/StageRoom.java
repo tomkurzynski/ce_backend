@@ -1,16 +1,13 @@
 package com.createvent.createvent.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -28,11 +25,12 @@ public class StageRoom {
 	@Column(name = "room_name")
 	private String name;
 	
+	@Lob
+	@Column(name="timetable_file")
+	private byte[] timetableFile;
+	
 	@ManyToOne
 	@JoinColumn(name = "event_id", nullable = false)
 	private Festival festival;
-	
-	@OneToMany(mappedBy = "stageRoom", orphanRemoval = true, cascade = CascadeType.PERSIST)
-	private List<Timetable> timetables;
 
 }
