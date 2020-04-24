@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.createvent.createvent.dto.UserRegDto;
 import com.createvent.createvent.entity.Users;
 
 //@RepositoryRestResource(collectionResourceRel = "user", path = "users")
@@ -13,5 +12,4 @@ public interface UserRepository extends JpaRepository<Users, Long>{
 	
 	Users findByEmail(String email);
 
-	public void save(UserRegDto userRegDto);
 }

@@ -38,6 +38,13 @@ public class FestivalService {
 
 	public void save(FestivalFestivalDto festivalDto) {
 		Festival festival = modelMapper.map(festivalDto, Festival.class);
+		Optional<Festival> original = this.getFestivalById(festival.getId());
+		festival.setFoods(original.get().getFoods());
+		festival.setNews(original.get().getNews());
+		festival.setPerformers(original.get().getPerformers());
+		festival.setStageRoom(original.get().getStageRoom());
+//		festival.setFoods(original.get().getFoods());
+		
 		festivalRepository.save(festival);
 	}
 	

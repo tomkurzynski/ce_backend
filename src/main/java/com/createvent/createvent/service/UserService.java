@@ -3,13 +3,11 @@ package com.createvent.createvent.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.createvent.createvent.dao.UserRepository;
-import com.createvent.createvent.dto.UserRegDto;
+import com.createvent.createvent.dto.UserDto;
 import com.createvent.createvent.entity.Users;
 
 import lombok.RequiredArgsConstructor;
@@ -20,10 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 	
 	private final UserRepository userRepository;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
+		
 	public List<Users> getAllUsers() {
 		return userRepository.findAll();
 	}
@@ -36,12 +31,12 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 	
-	public void save(UserRegDto userRegDto) {
+	public void save(UserDto userDto) {
 		Users user = new Users();
-		user.setEmail(userRegDto.getEmail());
-		user.setFirstName(userRegDto.getFirstName());
-		user.setLastName(userRegDto.getLastName());
-		user.setPassword(passwordEncoder.encode(userRegDto.getPassword()));
+		user.setEmail(userDto.getEmail());
+		user.setFirstName(userDto.getFirstName());
+		user.setLastName(userDto.getLastName());
+		user.setPassword(userDto.getPassword());
 		userRepository.save(user);
 	}
 }
