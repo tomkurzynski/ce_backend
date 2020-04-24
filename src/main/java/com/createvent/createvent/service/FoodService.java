@@ -36,6 +36,7 @@ public class FoodService {
 	
 	public List<Food> getFoodVendorByFestivalId(Long id) {
 		return foodRepository.findByFestivalId(id);
+		
 	}
 	
 	//edit

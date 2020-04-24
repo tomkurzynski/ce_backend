@@ -11,4 +11,5 @@ import com.createvent.createvent.entity.Performer;
 public interface PerformerRepository extends JpaRepository<Performer, Long>  {
 	
 	List<Performer> getPerformerByFestivalId(Long id);
+
 }

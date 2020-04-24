@@ -15,7 +15,7 @@ public class NewsDto {
 	
 	private String title;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date dateCreated;
 	
 	@JsonIgnore
