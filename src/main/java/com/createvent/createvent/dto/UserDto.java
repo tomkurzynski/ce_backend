@@ -29,5 +29,10 @@ public class UserDto {
 		this.festivals = festivals;
 		
 	}
+
+	public UserDto() {
+	}
+	
+	
 	
 }

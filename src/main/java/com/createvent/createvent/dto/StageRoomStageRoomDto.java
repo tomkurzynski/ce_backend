@@ -19,4 +19,13 @@ public class StageRoomStageRoomDto {
 		this.festival = festival;
 		this.timetableFile = timetableFile;
 	}
+
+	public StageRoomStageRoomDto(String name) {
+		this.name = name;
+	}
+
+	public StageRoomStageRoomDto() {
+	}
+	
+	
 }

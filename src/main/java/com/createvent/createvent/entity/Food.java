@@ -35,7 +35,6 @@ public class Food {
 	@Column(name="food_facebook")
 	private String facebook;
 	
-	
 	@ManyToOne()
 	@JoinColumn(name = "event_id", nullable = false)
 	private Festival festival;

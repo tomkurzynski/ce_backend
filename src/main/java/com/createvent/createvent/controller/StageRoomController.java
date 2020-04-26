@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.createvent.createvent.dto.FoodFoodDto;
 import com.createvent.createvent.dto.StageRoomFestivalDto;
 import com.createvent.createvent.dto.StageRoomStageRoomDto;
 import com.createvent.createvent.entity.Festival;
@@ -54,31 +55,33 @@ public class StageRoomController {
 		return convertToDto(stageRoom.get());
 	}
 	
-	//add
-//	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//	@ResponseStatus(HttpStatus.CREATED)
-//	public void addRoom(@RequestBody StageRoomDto stageRoom) {
-//		stageRoomService.save(stageRoom);
-//	}
-	
-	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public StageRoomStageRoomDto upload(@RequestPart(name = "file", required = false) MultipartFile file,
-						 @RequestPart("room") String room) throws IOException {
-		StageRoomStageRoomDto stageConverted = stageRoomConverter.convert(room); 
-		if(file != null) {
+			@RequestPart("room") String room) throws IOException {
+		StageRoomStageRoomDto stageConverted = stageRoomConverter.convert(room);
+		if (file != null) {
 			stageConverted.setTimetableFile(file.getBytes());
 		}
-		
+
 		stageRoomService.save(stageConverted);
 		return stageConverted;
+	}
+	
+	@PostMapping
+//	@ResponseStatus(HttpStatus.CREATED)
+	public StageRoomStageRoomDto upload(@RequestBody StageRoomStageRoomDto stageRoomDto) {
+	
+		
+		stageRoomService.save(stageRoomDto);
+		return stageRoomDto;
 	
 	}
 	
 	//update
-	@PutMapping(value = "{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PutMapping(value = "/save/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public StageRoomStageRoomDto update(@RequestPart(name = "file", required = false) MultipartFile file,
+	public StageRoomStageRoomDto update(@PathVariable Long id, @Valid @RequestPart(name = "file", required = false) MultipartFile file,
 						 @RequestPart("room") String room) throws IOException {
 		StageRoomStageRoomDto stageConverted = stageRoomConverter.convert(room); 
 		if(file != null) {

@@ -1,4 +1,4 @@
-	package com.createvent.createvent.controller;
+package com.createvent.createvent.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,81 +35,65 @@ public class FoodController {
 
 	@Autowired
 	private FoodService foodService;
-	
+
 	@Autowired
 	private StringToFoodDtoConverter foodConverter;
-		
+
 	@GetMapping()
 	public List<FoodFoodDto> getAllFoodVendors() {
 		List<Food> foodVendors = foodService.getFoodVendorList();
 		return foodVendors.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
-	
-	//get by id
+
 	@GetMapping("/{id}")
 	public FoodFoodDto getVendorById(@PathVariable Long id) {
 		Optional<Food> foodVendor = foodService.getFoodVendorById(id);
 		return convertToDto(foodVendor.get());
 	}
-	
+
 	@GetMapping("/list/{id}")
 	public List<FoodFoodDto> getVendorsByFestivalId(@PathVariable Long id) {
 		List<Food> foodVendors = foodService.getFoodVendorByFestivalId(id);
 		return foodVendors.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
-	
-
-
-//	@PostMapping(value = "/foods", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//	@ResponseStatus(HttpStatus.CREATED)
-//	public void addFoodVendor(@RequestBody FoodFoodDto foodVendor, MultipartFile file) {
-//		foodService.save(foodVendor);
-//	}
 
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public FoodFoodDto upload(@RequestPart(name = "file", required = false) MultipartFile file,
-						 @RequestPart("food") String food) throws IOException {
-//		return food + "\n" + file.getOriginalFilename() + "\n" + file.getSize();
-		FoodFoodDto foodConverted = foodConverter.convert(food); 
-		if(file != null) {
+			@RequestPart("food") String food) throws IOException {
+		FoodFoodDto foodConverted = foodConverter.convert(food);
+		if (file != null) {
 			foodConverted.setLogoUrl(file.getBytes());
 		}
-		
+
 		foodService.save(foodConverted);
 		return foodConverted;
-	
 	}
-	
-	//update
+
 	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void updateFoodVendor(@PathVariable Long id, @Valid @RequestPart(name = "file", required = false) MultipartFile file,
-								@RequestPart("food") String food) throws IOException {
+	public void updateFoodVendor(@PathVariable Long id,
+			@Valid @RequestPart(name = "file", required = false) MultipartFile file, @RequestPart("food") String food)
+			throws IOException {
 		FoodFoodDto foodConverted = foodConverter.convert(food);
-		if(file != null) {
+		if (file != null) {
 			foodConverted.setLogoUrl(file.getBytes());
 		}
 		foodService.save(foodConverted);
 	}
-	
-	//delete
+
 	@DeleteMapping("/{id}")
 	public void deleteFoodVendor(@PathVariable Long id) {
 		foodService.delete(id);
 	}
-	
+
 	private FoodFoodDto convertToDto(Food foodVendor) {
-		return new FoodFoodDto(foodVendor.getId(),
-				foodVendor.getFoodName(),
-				foodVendor.getFoodType(),
-				foodVendor.getLogoUrl(),
-				foodVendor.getFacebook(),
-				convertToDto(foodVendor.getFestival()));
+		return new FoodFoodDto(foodVendor.getId(), foodVendor.getFoodName(), foodVendor.getFoodType(),
+				foodVendor.getLogoUrl(), foodVendor.getFacebook(), convertToDto(foodVendor.getFestival()));
 	}
 
 	private FoodFestivalDto convertToDto(Festival festival) {
 		return new FoodFestivalDto(festival.getId());
 	}
-	
+
 }

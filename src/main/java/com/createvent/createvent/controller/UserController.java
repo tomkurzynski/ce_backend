@@ -66,7 +66,7 @@ public class UserController {
 		return convertToDto(user);
 	}
 	
-	@PostMapping
+	@PostMapping("/users")
 	public void createUser(@RequestBody UserDto userDto) {
 		userService.save(userDto);
 	}

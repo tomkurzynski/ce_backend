@@ -54,4 +54,9 @@ public class StageRoomFestivalDto {
 	public StageRoomFestivalDto(Long id) {
 		this.id = id;
 	}
+
+	public StageRoomFestivalDto() {
+	}
+	
+	
 }
