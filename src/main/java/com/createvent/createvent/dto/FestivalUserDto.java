@@ -39,8 +39,5 @@ public class FestivalUserDto {
 
 	public FestivalUserDto(Long id) {
 		this.id = id;
-	}
-	
-	
-	
+	}	
 }

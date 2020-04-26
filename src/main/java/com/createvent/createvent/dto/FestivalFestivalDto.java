@@ -20,11 +20,9 @@ public class FestivalFestivalDto {
 
 	private String eventDesc;
 
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date dateFrom;
 
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date dateTo;
 

@@ -23,9 +23,7 @@ public class PerformerPerformerDto {
 	
 	private PerformerFestivalDto festival;
 	
-	private byte[] photo;
-//	{"name":"321","description":"123","webUrl":"123","facebook":"123","twitter":"123","youtube":"123","spotify":"123","festival":{"id":"1"},"photo":null}
-	
+	private byte[] photo;	
 
 	public PerformerPerformerDto(Long id, String name, String description, String webUrl, String facebook,
 			String twitter, String youtube, String spotify, PerformerFestivalDto festival, byte[] photo) {

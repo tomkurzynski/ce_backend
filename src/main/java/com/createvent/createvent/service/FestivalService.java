@@ -20,43 +20,41 @@ import lombok.RequiredArgsConstructor;
 public class FestivalService {
 
 	private final FestivalRepository festivalRepository;
-	
+
 	@Autowired
 	private ModelMapper modelMapper = new ModelMapper();
-	
+
 	public List<Festival> getFestivalList() {
 		return festivalRepository.findAll();
 	}
-	
+
 	public List<Festival> getFestivalByUserId(Long userId) {
 		return festivalRepository.findByUserId(userId);
 	}
-	
+
 	public Optional<Festival> getFestivalById(Long id) {
 		return festivalRepository.findById(id);
 	}
 
 	public void save(FestivalFestivalDto festivalDto) {
 		Festival festival = modelMapper.map(festivalDto, Festival.class);
-		
+
 		if (festival.getId() != null) {
 			Optional<Festival> original = this.getFestivalById(festival.getId());
-		
-		if (original.isPresent()) {
-		festival.setFoods(original.get().getFoods());
-		festival.setNews(original.get().getNews());
-		festival.setPerformers(original.get().getPerformers());
-		festival.setStageRoom(original.get().getStageRoom());
+
+			if (original.isPresent()) {
+				festival.setFoods(original.get().getFoods());
+				festival.setNews(original.get().getNews());
+				festival.setPerformers(original.get().getPerformers());
+				festival.setStageRoom(original.get().getStageRoom());
+			}
 		}
-		}
-//		festival.setFoods(original.get().getFoods());
-		
+
 		festivalRepository.save(festival);
 	}
-	
+
 	public void delete(Long id) {
 		festivalRepository.deleteById(id);
 	}
-	
-	
+
 }

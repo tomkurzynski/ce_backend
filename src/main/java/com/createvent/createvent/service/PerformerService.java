@@ -26,10 +26,8 @@ public class PerformerService {
 		return performerRepository.findAll();
 	}
 	
-	public List<Performer> getPerformerByFestivalId(Long id) {
-		
-		return performerRepository.getPerformerByFestivalId(id);
-		
+	public List<Performer> getPerformerByFestivalId(Long id) {	
+		return performerRepository.getPerformerByFestivalId(id);	
 	}
 	
 	//get by id

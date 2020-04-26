@@ -18,40 +18,32 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class FoodService {
-	
+
 	private final FoodRepository foodRepository;
-	
+
 	@Autowired
 	private ModelMapper modelMapper = new ModelMapper();
-	
-	//list all
+
+	// list all
 	public List<Food> getFoodVendorList() {
 		return foodRepository.findAll();
 	}
-	
-	//list by id
+
+	// list by id
 	public Optional<Food> getFoodVendorById(Long id) {
 		return foodRepository.findById(id);
 	}
-	
+
 	public List<Food> getFoodVendorByFestivalId(Long id) {
 		return foodRepository.findByFestivalId(id);
-		
 	}
-	
-	//edit
-//	public void save(Food food) {
-//		foodRepository.save(food);
-//	}
-//	
 
 	public void save(FoodFoodDto foodDto) {
 		Food food = modelMapper.map(foodDto, Food.class);
 		foodRepository.save(food);
 	}
-	
-	
-	//delete
+
+	// delete
 	public void delete(Long id) {
 		foodRepository.deleteById(id);
 	}

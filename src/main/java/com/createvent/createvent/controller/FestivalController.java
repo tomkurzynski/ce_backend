@@ -37,28 +37,12 @@ import com.createvent.createvent.service.FestivalService;
 @RequestMapping(value = "/api/festivals")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FestivalController {
-
-//	@Autowired
-//	FestivalRepository festivalRepository;
 	
 	@Autowired
 	private FestivalService festivalService;
 	
 	@Autowired
 	private StringToFestivalDtoConverter festivalConverter;
-	
-//	@Autowired
-//	private UserService userService;
-	
-	
-	//get all
-//	@GetMapping()
-//	public List<FestivalFestivalDto> getAllFestivals() {
-//		
-//		List<Festival> festivals = festivalService.getFestivalList();
-//		
-//		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
-//	}
 	
 	//get by id
 	@GetMapping("/{id}")
@@ -75,17 +59,8 @@ public class FestivalController {
 		return festivals.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	
-	 //add
-//	@PostMapping("/festivals")
-//	@ResponseStatus(HttpStatus.CREATED)
-//	@ResponseBody
-//	public void addFestival(@RequestBody Festival festival) {
-//		festivalService.save(festival);
-//	}
-	
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-//	@ResponseBody
 	public void addFestival(@RequestPart(name = "file", required = false) MultipartFile file,
 			 @RequestPart("festival") String festival) throws IOException {
 		FestivalFestivalDto festivalConverted = festivalConverter.convertFestival(festival);

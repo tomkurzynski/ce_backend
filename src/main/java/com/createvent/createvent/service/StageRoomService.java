@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.createvent.createvent.dao.StageRoomRepository;
-import com.createvent.createvent.dto.StageRoomDto;
 import com.createvent.createvent.dto.StageRoomStageRoomDto;
 import com.createvent.createvent.entity.StageRoom;
 
@@ -18,27 +17,27 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StageRoomService {
 	private final StageRoomRepository stageRoomRepository;
-	
+
 	@Autowired
 	private ModelMapper modelMapper = new ModelMapper();
-	
-	//view all
+
+	// view all
 	public List<StageRoom> get(Long id) {
 		return stageRoomRepository.findRoomsByFestivalId(id);
 	}
-	
-	//view by id
+
+	// view by id
 	public Optional<StageRoom> getStageRoomById(Long id) {
 		return stageRoomRepository.findById(id);
 	}
-	
-	//save
+
+	// save
 	public void save(StageRoomStageRoomDto stageRoomDto) {
 		StageRoom stageRoom = modelMapper.map(stageRoomDto, StageRoom.class);
 		stageRoomRepository.save(stageRoom);
 	}
-	
-	//delete
+
+	// delete
 	public void delete(Long id) {
 		stageRoomRepository.deleteById(id);
 	}

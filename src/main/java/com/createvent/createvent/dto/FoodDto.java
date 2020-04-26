@@ -24,15 +24,6 @@ public class FoodDto {
 	@JsonIgnore
 	private Festival festival;
 
-//	public FoodDto(Long id, String foodName, String foodType, byte[] logoUrl, String facebook, Festival festival) {
-//		this.id = id;
-//		this.foodName = foodName;
-//		this.foodType = foodType;
-//		this.logoUrl = logoUrl;
-//		this.facebook = facebook;
-//		this.festival = festival;
-//	}
-
 	public FoodDto(Long id, String foodName) {
 		this.id = id;
 		this.foodName = foodName;

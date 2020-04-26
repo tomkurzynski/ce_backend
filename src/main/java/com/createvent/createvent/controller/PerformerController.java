@@ -59,13 +59,6 @@ public class PerformerController {
 		return performers.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	
-	//add
-//	@PostMapping("/performers")
-//	@ResponseStatus(HttpStatus.CREATED)
-//	public void addPerformer(@RequestBody Performer performer) {
-//		performerService.save(performer);
-//	}
-	
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public PerformerPerformerDto upload(@RequestPart(name = "file", required = false) MultipartFile file,
@@ -75,21 +68,13 @@ public class PerformerController {
 		if (file != null) {
 			performerConverted.setPhoto(file.getBytes());
 		} else {
-			
-//			Optional<Performer> performer1 = performerService.getPerformerById(performerConverted.getId());
-//			performerConverted.setPhoto(performer1.get().getPhoto());
+
 		}
 		performerService.save(performerConverted);
 		
 		return performerConverted;
 	
 	}
-	
-	//update
-//	@PutMapping("/performers/update/{id}")
-//	public void updatePerformer(@PathVariable Long id, @Valid @RequestBody PerformerPerformerDto performer) {
-//		performerService.save(performer);
-//	}
 	
 	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)

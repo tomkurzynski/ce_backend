@@ -2,11 +2,9 @@ package com.createvent.createvent.dto;
 
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class UserDto {
 	private Long id;
 	

@@ -24,48 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider);
     }
- 
-    
-//	  @Override
-//	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//	        auth.inMemoryAuthentication()
-//	                .withUser("user").password("{noop}password").roles("ADMIN");
-//
-//	    }
-	
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http	
-//			.authorizeRequests()
-//				.antMatchers("/api/**").permitAll()
-//				.antMatchers(HttpMethod.POST, "/api").hasRole("ADMIN")
-//			    .antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
-//			    .antMatchers(HttpMethod.PATCH, "/api/**").hasRole("ADMIN")
-//			    .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
-//				.anyRequest().authenticated()
-//				.and()
-//			.formLogin()
-//				.loginPage("/test")
-//				.permitAll()
-//				.and()
-//			.logout()
-//				.permitAll();
-//		}
-//	
-//	@Bean
-//	@Override
-//	public UserDetailsService userDetailsService() {
-//		UserDetails user =
-//			 User.withDefaultPasswordEncoder()
-//				.username("user")
-//				.password("password")
-//				.roles("USER")
-//				.build();
-//
-//		return new InMemoryUserDetailsManager(user);
-//	}
-	
+ 	
 	 @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 			http.cors().and().csrf().
@@ -87,14 +46,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 public PasswordEncoder passwordEncoder() {
 		 return new BCryptPasswordEncoder();
 	 }
-	 
-//	 @Bean
-//		CorsConfigurationSource corsConfigurationSource() {
-//			CorsConfiguration configuration = new CorsConfiguration();
-//			configuration.setAllowedOrigins(Arrays.asList("*"));
-//			configuration.setAllowedMethods(Arrays.asList("*"));
-//			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//			source.registerCorsConfiguration("/**", configuration);
-//			return source;
-//		}
 }

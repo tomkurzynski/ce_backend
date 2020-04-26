@@ -32,24 +32,15 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-//	@RequestMapping("/login")
-//	public boolean login(@RequestBody UserDto user) {
-//		return user.getEmail().equalsIgnoreCase("name") && user.getPassword().equals("password");
-//	}
-
-//	@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 	@GetMapping("/user")
 	public Principal user(HttpServletRequest request) {
-
 		String authToken = request.getHeader("Authorization").substring("Basic".length()).trim();
 		return () -> new String(Base64.getDecoder().decode(authToken)).split(":")[0];
-
 	}
 
 	@GetMapping(value = "/users")
 	public List<UserDto> getAllUsers() {
 		List<Users> users = userService.getAllUsers();
-
 		return users.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 
@@ -76,12 +67,9 @@ public class UserController {
 		userService.delete(id);
 	}
 	
-	
-
 	private UserDto convertToDto(Users user) {
 		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(),
 				convertToDto(user.getFestival()));
-
 	}
 
 	private List<FestivalDto> convertToDto(List<Festival> festival) {

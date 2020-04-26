@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.createvent.createvent.dto.FoodFoodDto;
 import com.createvent.createvent.dto.StageRoomFestivalDto;
 import com.createvent.createvent.dto.StageRoomStageRoomDto;
 import com.createvent.createvent.entity.Festival;
@@ -69,7 +68,6 @@ public class StageRoomController {
 	}
 	
 	@PostMapping
-//	@ResponseStatus(HttpStatus.CREATED)
 	public StageRoomStageRoomDto upload(@RequestBody StageRoomStageRoomDto stageRoomDto) {
 	
 		
